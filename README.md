@@ -1,4 +1,4 @@
-Telecom-theque
+Télécom'Thèque
 ==============
 
 Application de parcours virtuel du Télécom'thèque
@@ -9,23 +9,7 @@ Application de parcours virtuel du Télécom'thèque
 
 ## Partie client
 
-### Configuration
-
-Pour développer la partie client, se placer dans `code/client`, et utiliser la commande :
-
-```
-npm install
-```
-
-qui, grâce au fichier `package.json`, installera les dépendances requises.
-
-### Lancement d'Ionic
-
-Se placer dans Telecom-theque, et exécuter la commande suivante (ionic étant installer en local) :
-
-```
-../node_modules/ionic/bin/./ionic serve
-```
+[code/client/Telecom-theque/](code/client/Telecom-theque/)
 
 # Fonctionnalités attendues
 

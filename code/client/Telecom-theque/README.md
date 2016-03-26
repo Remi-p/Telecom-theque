@@ -1,25 +1,30 @@
-Ionic App Base
-=====================
+Télécom'Thèque - Client
+=======================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+### Configuration
 
-## Using this project
+Pour développer la partie client, se placer dans `code/client`, et utiliser la commande :
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
-
-```bash
-$ npm install -g ionic
+```
+npm install
 ```
 
-Then run:
+qui, grâce au fichier `package.json`, installera les dépendances requises.
 
-```bash
-$ ionic start myProject tabs
+### Lancement d'Ionic
+
+Se placer dans Telecom-theque (répertoire de ce *readme*), et exécuter la commande suivante (Ionic étant installé en local) :
+
+```
+../node_modules/ionic/bin/./ionic serve
 ```
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+### Plateforme : Windows Phone
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+[How to make your Ionic Cordova App to Run under Windows Phone 8.1 and Desktop](http://www.badpenguin.org/how-to-make-your-ionic-cordova-app-to-run-under-windows-phone-8-1-and-desktop)
+[Windows Platform Guide](https://cordova.apache.org/docs/en/latest/guide/platforms/win8/index.html)
+
+```
+../node_modules/cordova/bin/cordova platform add windows
+../node_modules/cordova/bin/cordova build --debug windows -- --phone --appx=8.1-phone --buildConfig build.json
+```
