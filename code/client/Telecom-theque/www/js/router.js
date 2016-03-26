@@ -19,5 +19,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: 'views/vitrine.html',
       controller: 'VitrineCtrl'
     })
+    
+    // Récupération d'un obj
+    $stateProvider.state('objet', {
+      url: '/objet/:id',
+      templateUrl: 'views/objet.html',
+      controller: 'ObjetCtrl'
+    })
   
 })

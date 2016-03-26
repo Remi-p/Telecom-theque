@@ -4,6 +4,7 @@
 url_base     = "tmp_json/";
 url_vitrines = "Vitrines.json";
 url_vitrine  = "Vitrine1.json";
+url_objet    = "Objet1.json";
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -43,8 +44,10 @@ app.controller("VitrinesCtrl", function($scope, $http) {
 });
 
 /* ================ Fetch des objets pour une vitrine =============== */
+
 app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
     
+    // TODO : Récupération dynamique
     var url = url_base + url_vitrine; // + $stateParams.id;
     
     $http.get(url).success(function(response) {
@@ -53,4 +56,19 @@ app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
     });
     
     return $scope.vitrine;
+});
+
+/* ======================== Fetch d'un objet ======================== */
+
+app.controller("ObjetCtrl", function($scope, $stateParams, $http) {
+    
+    // TODO : Récupération dynamique
+    var url = url_base + url_objet; // + $stateParams.id;
+    
+    $http.get(url).success(function(response) {
+        
+        $scope.objet = response;
+    });
+    
+    return $scope.objet;
 });
