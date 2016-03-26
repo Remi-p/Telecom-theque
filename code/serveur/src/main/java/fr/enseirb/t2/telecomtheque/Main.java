@@ -6,6 +6,8 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import fr.enseirb.t2.telecomtheque.config.CORSManager;
+
 import java.io.IOException;
 import java.net.URI;
 
@@ -25,7 +27,8 @@ public class Main {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.telecom package
         final ResourceConfig rc = new ResourceConfig().packages("fr.enseirb.t2.telecomtheque");
-
+        // Manage CORS
+        rc.register(new CORSManager());
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
         HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
