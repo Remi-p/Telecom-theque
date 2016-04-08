@@ -1,5 +1,7 @@
 package fr.enseirb.t2.telecomtheque.endpoints;
 
+import java.util.logging.Logger;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,6 +13,8 @@ import javax.ws.rs.core.Response;
 @Path("vitrines")
 public class VitrinesEndpoints {
 	
+    // get the global logger
+    Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	/**
 	 * GET des vitrines
 	 *
@@ -19,7 +23,6 @@ public class VitrinesEndpoints {
 	 * @return
 	 */
 	@GET  
-	@Path("")
 	@Produces("application/json")
 	public Response GetVitrines(){
 
@@ -30,22 +33,17 @@ public class VitrinesEndpoints {
 	}
 	
 	/**
-	 * GET d'une seule vitrine
+	 * GET d'une seule vitrine à partir de son id
 	 *
 	 * @param  
 	 * @throws 
 	 * @return
 	 */
 	@GET  
-	@Path("/{id}")
-	@Produces("application/json")
-	public Response GetVitrine(){
+	@Path("/{idvitrine}")
+	@Produces("text/plain")
+	public String GetVitrine(){
 
-		String json = "";
-		
-		// return http code  200
-		return Response.status(200).entity(json).build();			
+		return "coucou";
 	}
-	
-	
 }

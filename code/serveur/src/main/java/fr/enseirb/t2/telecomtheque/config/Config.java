@@ -10,6 +10,7 @@ public class Config {
 	/* General configuration 
 	================================================= */
 	public static boolean VERBOSE = true;
+	public static String LOGS_LOCATION;
 
 	// Private constructor : disallow creating instance
 	private Config() {}
