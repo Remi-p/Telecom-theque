@@ -60,7 +60,7 @@ app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
 
 /* ======================== Fetch d'un objet ======================== */
 
-app.controller("ObjetCtrl", function($scope, $stateParams, $http) {
+app.controller("ObjetCtrl", function($scope, $stateParams, $http, $ionicSlideBoxDelegate) {
     
     // TODO : Récupération dynamique
     var url = url_base + url_objet; // + $stateParams.id;
@@ -68,6 +68,9 @@ app.controller("ObjetCtrl", function($scope, $stateParams, $http) {
     $http.get(url).success(function(response) {
         
         $scope.objet = response;
+        
+        // Update des slides ; cf http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/
+        $ionicSlideBoxDelegate.update();
     });
     
     return $scope.objet;
