@@ -1,11 +1,11 @@
 <ion-view title="{{vitrine.nom}}">
     <ion-content class="padding">
-        <h1>TEST</h1>
+        <h1>{{vitrine.nom}}</h1>
         <div class="list">
-                <a ng-repeat="elm in vitrine.objets" class="item item-thumbnail-left" id="{{elm.id}}" href="#/objet/{{elm.id}}">
-                    <img src="{{elm.img}}">
+                <a ng-repeat="elm in vitrine.objets" class="item item-text-wrap item-thumbnail-left" id="{{elm.id}}" href="#/tab/objet/{{elm.id}}">
+                    <img src="{{elm.cover}}">
                     <h2>{{elm.nom}}</h2>
-                    <p>{{elm.description}}</p>
+                    <p>{{elm.annee}}</p>
                 </a>
         </div>
     </ion-content>

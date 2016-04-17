@@ -37,20 +37,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('tab.vitrine', {
       url: '/vitrine/:id',
       views: {
-        'vitrine': {
+        'tab-vitrines': {
           templateUrl: 'templates/vitrine.html',
           controller: 'VitrineCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    // Récupération d'un obj
+    .state('tab.objet', {
+      url: '/objet/:id',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-vitrines': {
+              templateUrl: 'templates/objet.html',
+              controller: 'ObjetCtrl'
+          }
         }
-      }
     })
 
   .state('tab.search', {

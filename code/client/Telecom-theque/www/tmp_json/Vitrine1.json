@@ -1,0 +1,24 @@
+{
+  "vitrine": "id1",
+  "nom": "Téléphones cellulaires",
+  "objets": [
+    {
+      "id": "id1",
+      "nom": "Vieux téléphone en forme de visage",
+      "annee": 1604,
+      "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/projets_perso.png"
+    },
+    {
+      "id": "id24",
+      "nom": "Vieux téléphone marron en forme de visage",
+      "annee": 1888,
+      "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/projets_perso.png"
+    },
+    {
+      "id": "id7",
+      "nom": "Téléphone de mon garage",
+      "annee": 1996,
+      "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/projets_perso.png"
+    }
+  ]
+}

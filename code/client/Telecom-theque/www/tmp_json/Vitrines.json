@@ -1,0 +1,20 @@
+[
+  {
+    "nom": "Téléphones cellulaires",
+    "id": "id1",
+    "nb_obj": 4,
+    "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/enseirb_matmeca.png"
+  },
+  {
+    "nom": "L'Internet",
+    "id": "id2",
+    "nb_obj": 2,
+    "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/enseirb_matmeca.png"
+  },
+  {
+    "nom": "Balboa",
+    "id": "id3",
+    "nb_obj": 224,
+    "cover": "http://www.thibaut.gourdel.fr/theme/Thibaut/images/enseirb_matmeca.png"
+  }
+]

@@ -8,7 +8,11 @@ url_objet    = "Objet1.json";
 
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope) {})
+.controller('HomeCtrl', function($scope, $ionicTabsDelegate) {
+    $scope.selectTabWithIndex = function(index) {
+        $ionicTabsDelegate.select(index);
+    }
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -63,4 +67,23 @@ app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
     });
     
     return $scope.vitrine;
+});
+
+
+/* ======================== Fetch d'un objet ======================== */
+
+app.controller("ObjetCtrl", function($scope, $stateParams, $http, $ionicSlideBoxDelegate) {
+    
+    // TODO : Récupération dynamique
+    var url = url_base + url_objet; // + $stateParams.id;
+    
+    $http.get(url).success(function(response) {
+        
+        $scope.objet = response;
+        
+        // Update des slides ; cf http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/
+        $ionicSlideBoxDelegate.update();
+    });
+    
+    return $scope.objet;
 });

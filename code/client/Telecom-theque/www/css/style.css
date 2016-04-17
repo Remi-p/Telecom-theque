@@ -1,1 +1,13 @@
-/* Empty. Add your own CSS if you like */
+.vitrines {
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+    .vitrines a {
+        background-color: #DCE9FF !important;
+    }
+
+.button-float-left {
+    float:left;
+    margin-right:15px;
+}
