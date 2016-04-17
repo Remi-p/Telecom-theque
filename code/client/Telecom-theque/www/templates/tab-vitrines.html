@@ -1,28 +1,21 @@
 <ion-view title="Vitrines">
     <ion-content class="padding">
-        <h1 class="title">Vitrines</h1>
+        <p>Liste des vitrines de l'ENSEIRB-MATMECA</p>
         
             <ion-list>
                 <!-- ng-repeat="chat in chats" -->
-              <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/tab/vitrine/{{vitrines._id.$oid}}">
+              <ion-item ng-repeat="elm in vitrines" class="item-thumbnail-left item-icon-right" type="item-text-wrap" href="#/tab/vitrine/{{elm.id}}">
                   
 <!--
             TODO => Change
             <a ng-repeat="elm in vitrines" class="item button button-full button-dark" id="{{elm._id.$oid}}" href="#/vitrine/{{elm.nom}}">{{elm.nom}}</a>
 -->
-                <img ng-src="{{vitrines._id.src}}">
-                <h2>{{vitrines._id.nom}}</h2>
-                <p>Blabla</p>
+                <img ng-src="{{elm.cover}}">
+                <h2>{{elm.nom}}</h2>
+                <p>{{elm.nb_obj}} objets</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
-
-                <ion-option-button class="button-assertive" ng-click="remove(chat)">
-                  Delete
-                </ion-option-button>
               </ion-item>
             </ion-list>
-        <div class="list">
-            <a class="item button button-full button-dark" id="{{vitrines._id.$oid}}" href="#/vitrine/">{{vitrines.nom}}</a>
-        </div>
     </ion-content>
 </ion-view>
 

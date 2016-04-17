@@ -1,7 +1,8 @@
 
 // VARIABLES
-url_base     = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
-url_vitrines = "vitrines/";
+//~ url_base     = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
+url_base     = "tmp_json/"
+url_vitrines = "Vitrines.json";
 url_vitrine  = "Vitrine1.json";
 url_objet    = "Objet1.json";
 
@@ -46,4 +47,20 @@ app.controller("VitrinesCtrl", function($scope, $http) {
     });
     
     return $scope.vitrines;
+});
+
+
+/* ================ Fetch des objets pour une vitrine =============== */
+
+app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
+    
+    // TODO : Récupération dynamique
+    var url = url_base + url_vitrine; // + $stateParams.id;
+    
+    $http.get(url).success(function(response) {
+        
+        $scope.vitrine = response;
+    });
+    
+    return $scope.vitrine;
 });

@@ -34,6 +34,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('tab.vitrine', {
+      url: '/vitrine/:id',
+      views: {
+        'vitrine': {
+          templateUrl: 'templates/vitrine.html',
+          controller: 'VitrineCtrl'
+        }
+      }
+    })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
