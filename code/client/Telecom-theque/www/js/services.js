@@ -1,5 +1,24 @@
 angular.module('starter.services', [])
 
+// Service de récupération de données
+
+.factory('GetJSON', function($http) {
+    
+    var url = "tmp_json/";
+    
+    return {
+        getdata: function(route) {
+            
+            promise = $http.get(url + route).then(function(response) {
+                return response.data;
+            });
+            
+            return promise;
+        }
+    };
+    
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

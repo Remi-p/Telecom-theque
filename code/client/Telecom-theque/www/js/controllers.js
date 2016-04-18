@@ -1,11 +1,3 @@
-
-// VARIABLES
-//~ url_base     = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
-url_base     = "tmp_json/"
-url_vitrines = "Vitrines.json";
-url_vitrine  = "Vitrine1.json";
-url_objet    = "Objet1.json";
-
 angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $ionicTabsDelegate) {
@@ -25,7 +17,7 @@ angular.module('starter.controllers', [])
           icon:"ios-search" },
         { click:"selectTabWithIndex(2)",
           text:"Scanner un QR Code",
-          color:"energized",
+          color:"royal",
           icon:"qr-scanner" }];
           
 })
@@ -57,51 +49,40 @@ angular.module('starter.controllers', [])
 
 /* ===================== Fetch des vitrines ========================= */
 
-app.controller("VitrinesCtrl", function($scope, $http) {
+app.controller("VitrinesCtrl", function($scope, GetJSON) {
     
-    var url = url_base + url_vitrines;
-    
-    $http.get(url).success(function(response) {
-        
-        $scope.vitrines = response;
+    GetJSON.getdata("Vitrines.json").then(function(d) {
+        $scope.vitrines = d;
     });
     
-    return $scope.vitrines;
 });
 
 
 /* ================ Fetch des objets pour une vitrine =============== */
 
-app.controller("VitrineCtrl", function($scope, $stateParams, $http) {
+app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
     
     // TODO : Récupération dynamique
-    var url = url_base + url_vitrine; // + $stateParams.id;
+    // $stateParams.id;
     
-    $http.get(url).success(function(response) {
-        
-        $scope.vitrine = response;
+    GetJSON.getdata("Vitrine1.json").then(function(d) {
+        $scope.vitrine = d;
     });
     
-    return $scope.vitrine;
 });
 
 
 /* ======================== Fetch d'un objet ======================== */
 
-app.controller("ObjetCtrl", function($scope, $stateParams, $http, $ionicSlideBoxDelegate) {
+app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate) {
     
-    // TODO : Récupération dynamique
-    var url = url_base + url_objet; // + $stateParams.id;
-    
-    $http.get(url).success(function(response) {
-        
-        $scope.objet = response;
+    GetJSON.getdata("Objet1.json").then(function(d) {
+        $scope.objet = d;
         
         // Update des slides ; cf http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/
         $ionicSlideBoxDelegate.update();
     });
     
-    return $scope.objet;
 });
 /* ======================== QR Code ======================== */
 

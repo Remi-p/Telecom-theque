@@ -65,8 +65,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('tab.qrcode', {
     url: '/qrcode',
-    templateUrl: 'templates/qrcode.html',
-
+    views: {
+      'tab-search': {
+        templateUrl: 'templates/qrcode.html',
+        controller: 'QrCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
