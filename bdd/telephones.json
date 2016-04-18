@@ -1,0 +1,19 @@
+[{
+    "nom": "Téléphone Minitel TD 9901 PHILIPS",
+    "annee": 1990,
+    "description": "Téléphone-Minitel de seconde génération. Ce matériel marque la transition à la fin des années 1990 entre cette technologie et l'internet.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010268_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Répondeur enregistreur TD 9341 PHILIPS",
+    "annee": 1980,
+    "description": "Appareil en matière plastique de couleur noire destiné à enregistrer les messages téléphoniques sur bandes magnétiques contenues dans des cassettes.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010271_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010272_p.jpg" }
+    ]
+    
+}]

@@ -1,0 +1,83 @@
+[{
+    "nom": "Caméra HERNEMAN",
+    "annee": 1926,
+    "description": "Caméra allemande pour prise de vue de film 35 mm. Manivelle avec poignée en bois. Poignée plate en cuir fixée à deux rivets sur le dessus. Niveau sphérique à bulle vissée sur le dessus. Sur le côté droit, un compteur (de 1 a 60) avec étiquette collée ciné spot. Près de la manivelle, une plaque en métal.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Caméra Pathé",
+    "annee": "20ème",
+    "description": "Camera Pathé panoramique 35 mm, avec trépied. Deux boites. Ressort. Objectif : E. Krauss Paris n° 123777. Tessar. I. 3,5 f.50b",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-1-1_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Projecteur radiocinéma 35mm 82301 PHILIPS",
+    "annee": "20ème siècle",
+    "description": "Lampe Xénon. Projecteur radiocinéma 35 mm. Cet appareil faisait probablement partie d'un ensemble de radiologie en usage dans un cabinet de radiologie ou à l'hôpital, avant d'être collecté par Albert Renaud, ingénieur lyonnais en radiologie et passionné par l'histoire de cette discipline.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017600_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017601_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017602_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017603_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017604_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017605_1.jpg" }
+    ]
+    
+},
+{
+    "nom": "Téléviseur TF 1426A Philips",
+    "annee": "1952",
+    "description": "Récepteur de télévision horizontal, quatre boutons situés sous l'écran permettent les réglages. Téléviseur Philips 1426 A, Type 819 lignes, 195 Watt, fonctionne sur courant alternatif entre 110 et 237 Volts, 50 Hz.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010297_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010298_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Téléviseur RA 2860 Radiola",
+    "annee": 1967,
+    "description": "Récepteur de télévision portable de marque Radiola en matière plastique de couleur noire et métal avec haut-parleur intégré dynamique à aimant permanent (bobine mobile). Alimentation sur secteur ou batteries rechargeables 110, 127,220,240,12 V. Equipé d'une poignée repliable.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010292_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010293_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Téléviseur portable Philips",
+    "annee": "1970",
+    "description": "Récepteur de télévision portable de marque Philips en matière plastique de couleur noire et métal. Equipé d'une poignée repliable. A droite, 6 boutons de réglage pour marche arrêt, la recherche de chaînes, le réglage du son, de la lumière et des contrastes.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010294_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010295_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Téléviseur portatif dit \"Pamplemousse\" Philips",
+    "annee": "1969",
+    "description": "Oscar du Design, cet appareil fut conçu par le chef du bureau d'études et l'esthéticien industriel de la société Philips au cours de l'année 1969. Ils utilisèrent le châssis d'un téléviseur portable et, avec l'aide d'un montage en fil de fer, ils définirent l'enveloppe du volume nécessaire. La mise au point des deux moitiés du coffret fut assez délicate notamment à cause des ajustements afin que l'enveloppe externe de l'appareil soit des plus impeccables. Surnommé \"Spoutnik\" par les techniciens de Philips, en allusion au célèbre satellite russe assez similaire dans la forme, ce téléviseur rencontra un vif succès auprès des clients qui souhaitaient de l'originalité et de la modernité.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_008191_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_008193_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_008195_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_008196_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Décodeur satellite 22 AV 1150 Philips",
+    "annee": 1980,
+    "description": "Cet appareil est la première STB (Set Top Box) à avoir été développée en D2MAC avec les composants ITT, il n'a pas été fabriqué en très grande série",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_018682_p.jpg" }
+    ]
+    
+}]

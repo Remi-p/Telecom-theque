@@ -1,0 +1,56 @@
+[{
+    "nom": "Récepteur de radiotélégraphie Bardon",
+    "annee": 1917,
+    "description": "Matériel conçu par l'ECRMRM (Etablissement Central du Matériel de la Radiotélégraphie Militaire , ou l'équipe Ferrié) mais construit par des sociétés privées telle que Bardon ; en rapport avec le Musée des arts et métiers",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0827/m502498_0009971_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0827/m502498_0009973_p.jpg" }
+    ]
+    
+},{
+    "nom": "Poste de radio 2501 PHILIPS",
+    "annee": 1928,
+    "description": "C'est un des premiers postes de radio Philips. Il possède un aspect très sobre, voir austère, noir sans aucun arrondis, tout en lignes brisées, ce qui lui valut le triste surnom de \"cerceuil\".",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010251_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010252_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Meuble radio phonographe 762 A PHILIPS",
+    "annee": 1934,
+    "description": "Combiné radio phone à 6 lampes, type superhétérodyne, 2 gammes d'ondes (PO, GO). Alimenté en courant alternatif de 110 à 240 V. Meuble ouvrant par un abattant sur le dessus laissant apparaître un lecteur de disques et un récepteur de radio, le haut-parleur se situe dans la partie basse.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010274_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010275_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010276_p.jpg" }
+    ]
+},
+{
+    "nom": "Récepteur radio RA 133 U Radiola",
+    "annee": 1940,
+    "description": "Poste de radio horizontal à haut-parleur intégré type FK 500-670. récepteur à 4 lampes (ECH3, ECF1, CBL1, CY2) type Superhétérodyne (MF 472 KHz), alimentation tous courants (C, A/C, 110 /130v, 200/250v). La caisse est en matière plastique de couleur marron imitation bois. Sur la façade, cadran indiquant les fréquences des radios avec les noms des villes du monde, sous le cadran 3 boutons permettaient la recherche des stations émettrices et le réglage du son, puis en bas à droite marque Radiola en lettres dorées sur fond bleu.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010241_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010242_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010243_p.jpg" }
+    ]
+},
+{
+    "nom": "Récepteur radio BF 313 A PHILIPS",
+    "annee": 1952,
+    "description": "Poste de radio horizontal à haut-parleur intégré. La caisse est en matière plastique de couleur marron. Sur la façade, cadran indiquant les fréquences des radios avec les noms des villes du monde, situés sous le cadran 2 boutons permettaient la recherche des stations émettrices et le réglage du son. A l'arrière, le panneau de protection du système électrique est manquant, présence des lampes dites aussi tubes électroniques et du cordon d'alimentation électrique.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010246_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010247_p.jpg" }
+    ]
+},
+{
+    "nom": "Récepteur radio B2F 72 A PHILIPS",
+    "annee": 1958,
+    "description": "Petit poste de radio horizontal avec haut-parleur intégré, à 4 lampes, 3 gammes d'ondes. Le coffret est en matière plastique de couleur rouge et ivoire. Sur la façade, cadran indiquant les fréquences des radios et les noms de villes du monde, situés de part et d'autre du cadran, deux boutons permettaient la recherche des stations émettrices et le réglage du son, situés sous le cadran, 2 touches pour la marche et l'arrêt.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010256_p.jpg" }
+    ]
+}]

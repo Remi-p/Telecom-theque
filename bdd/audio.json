@@ -1,0 +1,41 @@
+[{
+    "nom": "Electrophone PHILIPS",
+    "annee": 1959,
+    "description": "Petit électrophone portatif avec haut-parleur intégré permettant la lecture de disques microsillons. La caisse est en matière plastique recouverte d'un tissu de couleur jaune. Il est équipé d'une poignée, sur le devant de la caisse nom Philips en lettres dorées.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_018684_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_018685_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Electrophone Philips NG 2474 S",
+    "annee": 1959,
+    "description": "Electrophone portatif dans sa valisette, double haut-parleur pour lecture disques microsillons. Electrophone en malette gainée deux tons. Tourne disque NG 2082. Deux haut-parleurs inversés dans le couvercle amovible. Réglage de tonalité progressif. Commutateur de \"graves\" à deux positions. Prise pour modulation. Voyant de marche lumineux. Carrousel de tensions accessible sous le plateau, présence du cordon d'alimentation électrique.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010289_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010290_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010291_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Tourne-disque Radiola",
+    "annee": 1960,
+    "description": "Tourne disque A64100 fabriqué à 1.500000 exemplaires à Flers",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010261_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010262_p.jpg" }
+    ]
+    
+},
+{
+    "nom": "Magnétophone Philips",
+    "annee": 1964,
+    "description": "Petit magnétophone portatif à cassette magnétique, en métal et matière plastique de couleur noire et gris métal.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010257_p.jpg" },
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010258_p.jpg" }
+    ]
+    
+}]

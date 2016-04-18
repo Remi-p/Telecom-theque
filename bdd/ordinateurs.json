@@ -1,0 +1,9 @@
+{
+    "nom": "Terminal Minitel 1 HERNEMAN",
+    "annee": 1985,
+    "description": "Terminal Minitel muni d'un écran et d'un clavier alphanumérique permettant d'accéder à divers services comme les annuaires, les services télématiques, etc...Le coffret est en matière plastique de couleur ivoire et marron. A l'arrière, présence du cordon d'alimentation électrique.",
+    "imgs":  [
+        { "src":"http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010296_p.jpg" }
+    ]
+    
+}
