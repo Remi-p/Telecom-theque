@@ -11,3 +11,12 @@
     float:left;
     margin-right:15px;
 }
+.item-input input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
+
+
+.item-input.custom input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
