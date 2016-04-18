@@ -1,0 +1,68 @@
+.vitrines {
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+    .vitrines a {
+        background-color: #DCE9FF !important;
+    }
+
+.button-float-left {
+    float:left;
+    margin-right:15px;
+}
+<<<<<<< HEAD
+
+/* ========================== Animations ============================ */
+/* http://gonehybrid.com/how-to-animate-your-ionic-app-with-animate-css-and-nganimate/ */
+
+.title-animated {
+    animation: fadeInLeft 0.5s;
+    -webkit-animation: fadeInLeft 0.5s;
+}
+
+ion-tabs p, .button-home {
+    animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+}
+
+.button-home.ng-enter {
+    animation: lightSpeedIn 1.5s;
+    -webkit-animation: lightSpeedIn 1.5s;
+}
+
+.objet-item.ng-enter {
+    -webkit-animation: flipInX 1s;
+    animation: flipInX 1s;
+}
+
+.vitrines-item.ng-enter {
+    -webkit-animation: fadeInLeft 1s;
+    animation: fadeInLeft 1s;
+}
+
+.vitrines-item.ng-enter-stagger, .objet-item.ng-enter-stagger, .button-home.ng-enter-stagger {
+  -webkit-animation-delay:200ms;
+  animation-delay:200ms;
+
+  /* override to make sure it's not inherited from other styles */
+  -webkit-animation-duration:0;
+  animation-duration:0;
+}
+
+/* === QRCODE === */
+
+=======
+>>>>>>> bc445a04da738a8a66cd779847b785ff04b64b52
+.item-input input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bc445a04da738a8a66cd779847b785ff04b64b52
+.item-input.custom input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
