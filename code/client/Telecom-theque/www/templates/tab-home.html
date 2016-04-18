@@ -1,18 +1,18 @@
 <ion-view view-title="Télécom'thèque">
   <ion-content class="padding">
-    <h1>Télécom'tour</h1>
+    <h1 class="title-animated">Télécom'tour</h1>
     <p>
         Bienvenue sur l'application de <b>visite virtuelle</b> de la <b>Télécom'thèque</b>.
     </p>
-    <button class="button button-block button-outline button-positive icon-left ion-ios-browsers" ng-click="selectTabWithIndex(1)">
-      Liste des vitrines
-    </button>
     
-    <button class="button button-block button-outline button-balanced icon-left ion-ios-search" ng-click="selectTabWithIndex(2)">
-      Rechercher un objet
+    <button ng-repeat="elm in buttonshome" class="button button-block button-outline button-{{elm.color}} icon-left ion-ios-browsers button-home" ng-click="{{elm.click}}">
+      {{elm.text}}
     </button>
+    <a class="button button-block button-outline button-balanced icon-left ion-qr-scanner" href="#/tab/qrcode">
+      Scanner un Qr Code
+    </a>
     
-    <h2>À propos</h2>
+    <h2 class="title-animated">À propos</h2>
     
     <p>Cette application de parcours virtuel de la Télécom'thèque a été créée dans le cadre du cours des Dr. Laurent Réveillère et Jean-Remy Falleri.</p>
     

@@ -12,6 +12,15 @@ angular.module('starter.controllers', [])
     $scope.selectTabWithIndex = function(index) {
         $ionicTabsDelegate.select(index);
     }
+    
+    // On fait un ng-repeat pour que l'anim. ne se fasse qu'une fois
+    $scope.buttonshome = [
+        { click:"selectTabWithIndex(1)",
+          text:"Liste des vitrines",
+          color:"positive" },
+        { click:"selectTabWithIndex(2)",
+          text:"Rechercher un objet",
+          color:"balanced" }];
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -86,4 +95,16 @@ app.controller("ObjetCtrl", function($scope, $stateParams, $http, $ionicSlideBox
     });
     
     return $scope.objet;
+});
+/* ======================== QR Code ======================== */
+
+app.controller("QrCtrl",function($scope,$cordovaBarcodeScanner){
+
+  $scope.lireCode=function(){
+    $cordovaBarcodeScanner.scan().then( function(image_a_scan){
+        alert(image_a_scan.text)
+    },function(error){
+        alert("Erreur !"+error)
+    });
+  }
 });

@@ -2,7 +2,7 @@
     <ion-content class="padding">
         <h1>{{vitrine.nom}}</h1>
         <div class="list">
-                <a ng-repeat="elm in vitrine.objets" class="item item-text-wrap item-thumbnail-left" id="{{elm.id}}" href="#/tab/objet/{{elm.id}}">
+                <a ng-repeat="elm in vitrine.objets" class="item item-text-wrap item-thumbnail-left objet-item" id="{{elm.id}}" href="#/tab/objet/{{elm.id}}">
                     <img src="{{elm.cover}}">
                     <h2>{{elm.nom}}</h2>
                     <p>{{elm.annee}}</p>
