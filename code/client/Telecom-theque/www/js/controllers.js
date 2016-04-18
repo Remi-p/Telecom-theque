@@ -17,10 +17,17 @@ angular.module('starter.controllers', [])
     $scope.buttonshome = [
         { click:"selectTabWithIndex(1)",
           text:"Liste des vitrines",
-          color:"positive" },
+          color:"positive",
+          icon:"ios-browsers" },
         { click:"selectTabWithIndex(2)",
           text:"Rechercher un objet",
-          color:"balanced" }];
+          color:"balanced",
+          icon:"ios-search" },
+        { click:"selectTabWithIndex(2)",
+          text:"Scanner un QR Code",
+          color:"energized",
+          icon:"qr-scanner" }];
+          
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
