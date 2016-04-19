@@ -13,7 +13,6 @@ public class CORSManager implements ContainerResponseFilter {
 				throws IOException {
 	 
 			MultivaluedMap<String, Object> headers = responseContext.getHeaders();
-	 
 			headers.add("Access-Control-Allow-Origin", "*");
 			headers.add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");			
 			headers.add("Access-Control-Allow-Headers", "Accept, Accept-Encoding, Authorization, Content-Length, Content-Type, Host, If-Match, Origin, X-Requested-With, User-Agent, No-Auth-Challenge");
