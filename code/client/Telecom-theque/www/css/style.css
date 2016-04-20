@@ -12,6 +12,31 @@
     margin-right:15px;
 }
 
+/* Cropped images */
+/* http://stackoverflow.com/a/26921844 */
+.center-cropped, .slider-slide {
+  overflow:hidden;
+}
+.center-cropped img, .slider-slide img {
+  min-width: 100%;
+  left: 50%;
+  top: 50%;
+  position: relative;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+
+/* Centre les images du slider */
+.slider {
+    height:0;
+    padding-bottom:100%;
+}
+.slider-slide {
+  padding-bottom:100%;
+}
+.slider-slide img {
+}
+
 /* ========================== Animations ============================ */
 /* http://gonehybrid.com/how-to-animate-your-ionic-app-with-animate-css-and-nganimate/ */
 

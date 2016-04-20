@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 
 app.controller("VitrinesCtrl", function($scope, GetJSON) {
     
-    GetJSON.getdata("Vitrines.json").then(function(d) {
+    GetJSON.getdata("vitrines/").then(function(d) {
         $scope.vitrines = d;
     });
     
@@ -62,10 +62,7 @@ app.controller("VitrinesCtrl", function($scope, GetJSON) {
 
 app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
     
-    // TODO : Récupération dynamique
-    // $stateParams.id;
-    
-    GetJSON.getdata("Vitrine1.json").then(function(d) {
+    GetJSON.getdata("vitrines/" + $stateParams.id).then(function(d) {
         $scope.vitrine = d;
     });
     
@@ -76,7 +73,7 @@ app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
 
 app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate) {
     
-    GetJSON.getdata("Objet1.json").then(function(d) {
+    GetJSON.getdata("objets/" + $stateParams.id).then(function(d) {
         $scope.objet = d;
         
         // Update des slides ; cf http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/

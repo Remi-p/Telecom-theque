@@ -4,7 +4,7 @@ angular.module('starter.services', [])
 
 .factory('GetJSON', function($http) {
     
-    var url = "tmp_json/";
+    var url = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
     
     return {
         getdata: function(route) {

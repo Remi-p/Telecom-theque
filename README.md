@@ -32,4 +32,8 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 
 # Fonctionnalités supplémentaires
 
-* ...
+## Fonctionnalités client
+
+* Présentation des images d'un objet avec un slider
+* Animations dans l'application
+* Recadrage automatique des images
