@@ -81,9 +81,15 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
     });
     
 });
-/* ======================== QR Code ======================== */
 
-app.controller("QrCtrl",function($scope,$cordovaBarcodeScanner){
+
+/* ======================== QR Code et Fetch des objets======================== */
+
+app.controller("AccountCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
+  
+  GetJSON.getdata("objets/").then(function(d) {
+        $scope.objets = d;
+    });
 
   $scope.lireCode=function(){
     $cordovaBarcodeScanner.scan().then( function(image_a_scan){
