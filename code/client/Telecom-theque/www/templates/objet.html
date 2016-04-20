@@ -4,8 +4,10 @@
         
         <ion-slide-box on-slide-changed="onSlideChanged(index)" active-slide="currentIndex">
             <ion-slide ng-repeat="elm in objet.imgs">
-                <div class="item item-image">
+                <div class="item item-image" style="background-image:url({{elm.src}})">
+<!--
                     <img src="{{elm.src}}"/>
+-->
                 </div>
             </div>
         </ion-slide-box>

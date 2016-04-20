@@ -14,6 +14,7 @@
        	<a ng-repeat="elm in objets | filter:q" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
         	<div class="center-cropped item-image">
         		<!--  <img src="{{elm.cover}}"> -->
+                <img src="{{elm.imgs[0].src}}"> <!-- tmp -->
            	</div>
         	<h2>{{elm.nom}}</h2>
         	<p>{{elm.annee || 'Date inconnue'}}</p>

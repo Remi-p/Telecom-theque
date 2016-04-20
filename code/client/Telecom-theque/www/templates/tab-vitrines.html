@@ -11,7 +11,9 @@
             TODO => Change
             <a ng-repeat="elm in vitrines" class="item button button-full button-dark" id="{{elm._id.$oid}}" href="#/vitrine/{{elm.nom}}">{{elm.nom}}</a>
 -->
-                <img ng-src="{{elm.cover}}">
+                <div class="center-cropped item-image">
+                  <img src="{{elm.cover}}">
+                </div>
                 <h2>{{elm.nom}}</h2>
                 <p>{{elm.nb_obj}} objets</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>

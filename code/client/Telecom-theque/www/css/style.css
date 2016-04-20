@@ -17,7 +17,7 @@
 .center-cropped, .slider-slide {
   overflow:hidden;
 }
-.center-cropped img, .slider-slide img {
+.center-cropped img {
   min-width: 100%;
   left: 50%;
   top: 50%;
@@ -26,7 +26,8 @@
   -webkit-transform: translateX(-50%) translateY(-50%);
 }
 
-/* Centre les images du slider */
+/* Redimensionne les images du sliders */
+/*
 .slider {
     height:0;
     padding-bottom:100%;
@@ -34,7 +35,20 @@
 .slider-slide {
   padding-bottom:100%;
 }
-.slider-slide img {
+.slider-slide .item-image {
+    width:100%;
+    height:0;
+    padding-bottom:100%;
+}
+.slider-slide .item-image img {
+    object-fit:contain;
+}
+*/
+.slider-slide .item-image {
+    padding-bottom:100%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain;
 }
 
 /* ========================== Animations ============================ */

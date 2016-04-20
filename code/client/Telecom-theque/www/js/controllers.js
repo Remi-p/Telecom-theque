@@ -85,7 +85,7 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
 
 /* ======================== QR Code et Fetch des objets======================== */
 
-app.controller("AccountCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
+app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
   
   GetJSON.getdata("objets/").then(function(d) {
         $scope.objets = d;

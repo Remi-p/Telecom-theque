@@ -59,7 +59,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'tab-search': {
         templateUrl: 'templates/tab-search.html',
-        controller: 'AccountCtrl'
+        controller: 'SearchCtrl'
       }
     }
   });
