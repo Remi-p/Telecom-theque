@@ -7,7 +7,7 @@ public class VitrineObjetsReturn {
 	
 	private String vitrine;
 	private String nom;
-	private List<ObjetReturn> objets;
+	private List<Object> objets;
 	public String getVitrine() {
 		return vitrine;
 	}
@@ -20,14 +20,14 @@ public class VitrineObjetsReturn {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public List<ObjetReturn> getObjets() {
+	public List<Object> getObjets() {
 		return objets;
 	}
-	public void setObjets(List<ObjetReturn> objets) {
+	public void setObjets(List<Object> objets) {
 		this.objets = objets;
 	}
 	
 	public VitrineObjetsReturn() {
-		this.objets = new ArrayList<ObjetReturn>();
+		this.objets = new ArrayList<Object>();
 	}
 }

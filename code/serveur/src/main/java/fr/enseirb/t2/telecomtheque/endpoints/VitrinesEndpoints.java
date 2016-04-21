@@ -13,7 +13,9 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCursor;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
+import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
+import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
 import fr.enseirb.t2.telecomtheque.models.VitrineObjetsReturn;
 import fr.enseirb.t2.telecomtheque.models.VitrineReturn;
 import fr.enseirb.t2.telecomtheque.models.Vitrines;
@@ -128,18 +130,32 @@ public class VitrinesEndpoints {
 			
 			ObjetReturn obj_return = new ObjetReturn();
 			obj_return.setId(objs_id);
-			
+						
 				// Obtention du champs cover à partir du premier objet
 				Document objet_for_cover = mongo_objets.SelectionParId(objs_id);
 				// Serialisation de cet objet
 				Objets objet = gson.fromJson(objet_for_cover.toJson(),Objets.class);
 				
-				obj_return.setNom(objet.getNom());
-				obj_return.setAnnee(objet.getAnnee());
-				obj_return.setCover(objet.getImgs().get(0).getSrc());
-			
+				// Serialization
+				if (objet.getDisp_annee() == null) {
+					// Si la date est à afficher telle quelle
+					obj_return.setNom(objet.getNom());
+					obj_return.setAnnee(objet.getAnnee());
+					obj_return.setCover(objet.getImgs().get(0).getSrc());
+					
+					vit_return.getObjets().add(obj_return);
+				}
+				else {
+					// Si la date est à afficher est un siècle
+					ObjetReturnBis obj_return_bis = new ObjetReturnBis(objet);
+					
+					vit_return.getObjets().add(obj_return_bis);
+				}
+				
+
+				
 			// Ajout de cet objet à la liste des objets
-			vit_return.getObjets().add(obj_return);
+
 		 }
 		
 		// Serialisation de l'objet retourné

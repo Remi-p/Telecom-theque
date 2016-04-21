@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.bson.Document;
@@ -16,6 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.mongodb.client.MongoCursor;
 
+import fr.enseirb.t2.telecomtheque.config.Config;
+import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.Objets;
 import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
 import fr.enseirb.t2.telecomtheque.requests.MongoDB;
@@ -115,6 +118,65 @@ public class ObjetsEndpoints {
 		
 		return Response.status(200).entity(objets_response).build();	
 	}
+	
+	/**
+	 * GET de recherche d'un objet
+	 *
+	 * @param nom : nom de l'objet
+	 * 		  amin : annee minimum
+	 * 		  amax : annee maximum
+	 * @return liste d'objet repondant aux critère
+	 */
+	@GET
+	@Path("/recherche")
+	@Produces("application/json")
+	public Response GetRechercheObjet(@QueryParam("nom") String nom,
+									  @QueryParam("amin") int amin,
+									  @QueryParam("amax") int amax){
+		
+		LOGGER.info(nom);
+		LOGGER.info(Integer.toString(amin));
+		LOGGER.info(Integer.toString(amax));
+		
+		// Initialisation
+		Gson gson = new Gson();
+		List<ObjetReturn> listObjets = new ArrayList<ObjetReturn>();
+		MongoCursor<Document> cursor;
+		
+		// Connexion à la base de donnée
+		MongoDB mongo = new MongoDB(Config.DB, Config.OBJETS); // db et collection
+		
+		// Obtention de tous les objets
+		 cursor = mongo.Recherche(nom, amin, amax);
 
+		// Boucle sur tous les objets
+		try {
+		    while (cursor.hasNext()) {
+		    	Document objet = cursor.next(); // Deplacement du curseur
+		    	// Deserialisation
+				Objets objet_java = gson.fromJson(objet.toJson(),Objets.class);
+				// Ajout de l'objet dans la liste des objets
+				
+				ObjetReturn obj_return = new ObjetReturn();
+				
+				obj_return.setId(objet_java.get_id().get$oid());
+				obj_return.setNom(objet_java.getNom());
+				obj_return.setAnnee(objet_java.getAnnee());
+				obj_return.setCover(objet_java.getImgs().get(0).getSrc());
+				
+				listObjets.add(obj_return);
+		    }
+		} finally {
+		    cursor.close();
+		}
+
+		// Serialisation
+		String resp = gson.toJson(listObjets);
+		
+		mongo.Deconnexion();
+		return Response.status(200).entity(resp).build();		
+	}
+
+	
 	
 }
