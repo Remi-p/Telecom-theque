@@ -1,20 +1,47 @@
 <ion-view view-title="Rechercher un objet">
-  <ion-content class="padding">
-      
+  <ion-content class="padding"> 
     <button class="button button-block button-outline button-royal icon-left ion-qr-scanner button-home" href="#/tab/qrcode" ng-click="lireCode()">
       Scanner un QR-Code
     </button>
     
 	<label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="search" placeholder="Rechercher..." ng-model="q.nom">
-    </label>
-    <br>
+      <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-click="validSearch(q.nom,0,2016)">
+  </label>
+  <input type="text" id="example_id" name="range" value="" />
+  <script>
+
+    $(function () {
+
+        $("#range").ionRangeSlider({
+            hide_min_max: true,
+            keyboard: true,
+            min: 0,
+            max: 5000,
+            from: 1000,
+            to: 4000,
+            type: 'double',
+            step: 1,
+            grid: true
+        });
+
+    });
+</script>
+  <button class="button button-block button-outline button-positive button-home" ng-click="validSearch(q.nom,0,2016)">Chercher</button>
+   <!--   <button class="button button-block button-outline button-positive icon-left ion-funnel button-home" ng-click="showHide()">Filtrer par siécle</button>
+    <input type="text" id="example_id" name="example_name" value="" />
+   <div class="check-element animate-show" ng-show="IsVisible">
     <ion-list>
-       	<a ng-repeat="elm in objets | filter:q" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
+        <ion-checkbox ng-model='q.annee' ng-true-value='18' ng-false-value='' >19iéme siécle</ion-checkbox>
+        <ion-checkbox ng-model='q.annee' ng-true-value='19' ng-false-value='' >20iéme siécle</ion-checkbox>
+        <ion-checkbox ng-model='q.annee' ng-true-value='20' ng-false-value='' >21iéme siécle</ion-checkbox>
+    </ion-list>
+    <br>
+    </div> -->
+    <ion-list>
+       	<a ng-repeat="elm in search" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
         	<div class="center-cropped item-image">
-        		<!--  <img src="{{elm.cover}}"> -->
-                <img src="{{elm.imgs[0].src}}"> <!-- tmp -->
+                <img src="{{elm.cover}}"> <!-- tmp -->
            	</div>
         	<h2>{{elm.nom}}</h2>
         	<p>{{elm.annee || 'Date inconnue'}}</p>

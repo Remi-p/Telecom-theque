@@ -86,11 +86,23 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
 /* ======================== QR Code et Fetch des objets======================== */
 
 app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
-  
-  GetJSON.getdata("objets/").then(function(d) {
-        $scope.objets = d;
-    });
+    
+  //  GetJSON.getdata("objets/").then(function(d) {
+   //     $scope.objets = d;
+   // });
 
+    $scope.validSearch=function(param,param2,param3){
+      GetJSON.getdata("objets/recherche?nom="+param+"&amim="+param2+"&amax="+param3).then(function(d) {
+        $scope.search= d;
+      });
+    }
+    //Filtre siécle
+   // $scope.IsVisible = false;
+   // $scope.showHide = function () {
+  //  $scope.IsVisible = $scope.IsVisible ? false : true;
+   // }
+   //$("#example_id").ionRangeSlider();
+  //Qr code
   $scope.lireCode=function(){
     $cordovaBarcodeScanner.scan().then( function(image_a_scan){
         alert(image_a_scan.text)
@@ -98,4 +110,7 @@ app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
         alert("Erreur !"+error)
     });
   }
+
+ 
 });
+
