@@ -66,11 +66,20 @@ public class MongoDB {
 		// Filtre les dates
 		// Filtre aussi avec une regex
 		// L'option i permet de ne pas prendre en compte la casse
+		
 		nom.replaceAll(" ", "[\\s]"); // to handle space
 		
 		MongoCursor<Document> cursor = this.collection.find(and(regex("nom", nom, "i"), gte("annee", amin), lte("annee", amax))).iterator();
 		
 		return cursor;
+	}
+	
+	/**
+	 * Methode qui retourne les dates minimales et maximales des objets
+	 * pour afficher le curseur de séléction lors d'une recherche
+	 */
+	public void DatesPourCurseurs() {
+		
 	}
 	
 	/**

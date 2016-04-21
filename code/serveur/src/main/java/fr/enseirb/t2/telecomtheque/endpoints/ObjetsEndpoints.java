@@ -19,6 +19,7 @@ import com.mongodb.client.MongoCursor;
 
 import fr.enseirb.t2.telecomtheque.config.Config;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
+import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
 import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
 import fr.enseirb.t2.telecomtheque.requests.MongoDB;
@@ -140,7 +141,7 @@ public class ObjetsEndpoints {
 		
 		// Initialisation
 		Gson gson = new Gson();
-		List<ObjetReturn> listObjets = new ArrayList<ObjetReturn>();
+		List<Object> listObjets = new ArrayList<Object>();
 		MongoCursor<Document> cursor;
 		
 		// Connexion à la base de donnée
@@ -157,14 +158,23 @@ public class ObjetsEndpoints {
 				Objets objet_java = gson.fromJson(objet.toJson(),Objets.class);
 				// Ajout de l'objet dans la liste des objets
 				
-				ObjetReturn obj_return = new ObjetReturn();
-				
-				obj_return.setId(objet_java.get_id().get$oid());
-				obj_return.setNom(objet_java.getNom());
-				obj_return.setAnnee(objet_java.getAnnee());
-				obj_return.setCover(objet_java.getImgs().get(0).getSrc());
-				
-				listObjets.add(obj_return);
+				// Serialization
+				if (objet_java.getDisp_annee() == null) {
+					// Si la date est à afficher telle quelle
+					ObjetReturn obj_return = new ObjetReturn();
+					obj_return.setId(objet_java.get_id().get$oid());
+					obj_return.setNom(objet_java.getNom());
+					obj_return.setAnnee(objet_java.getAnnee());
+					obj_return.setCover(objet_java.getImgs().get(0).getSrc());
+					
+					listObjets.add(obj_return);
+				}
+				else {
+					// Si la date est à afficher est un siècle
+					ObjetReturnBis obj_return_bis = new ObjetReturnBis(objet_java);
+					
+					listObjets.add(obj_return_bis);
+				}
 		    }
 		} finally {
 		    cursor.close();
