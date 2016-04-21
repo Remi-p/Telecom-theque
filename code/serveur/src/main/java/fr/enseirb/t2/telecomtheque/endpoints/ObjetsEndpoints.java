@@ -1,7 +1,5 @@
 package fr.enseirb.t2.telecomtheque.endpoints;
 
-import static com.mongodb.client.model.Filters.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,17 +11,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import com.google.gson.Gson;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
+import com.google.gson.annotations.Expose;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
 
-import fr.enseirb.t2.telecomtheque.models.ListObjets;
 import fr.enseirb.t2.telecomtheque.models.Objets;
-import fr.enseirb.t2.telecomtheque.models._id;
+import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
+import fr.enseirb.t2.telecomtheque.requests.MongoDB;
 
 /**
  * Gestion des endpoints relatifs aux Objets
@@ -45,44 +40,34 @@ public class ObjetsEndpoints {
 	@Produces("application/json")
 	public Response GetObjets(){
 		
-		MongoClient mongoClient = new MongoClient();
-		MongoDatabase db = mongoClient.getDatabase("test");
-		MongoCollection<Document> collection = db.getCollection("objets");	
-		
-		// De-serialization
+		// Initialisation
 		Gson gson = new Gson();
-		//Document myDoc = collection.find().first();
-		
 		List<Objets> listObjets = new ArrayList<Objets>();
-		LOGGER.info("MongoCursor");
-		MongoCursor<Document> cursor = collection.find().iterator();
-    	int i = 0;
+		MongoCursor<Document> cursor;
+		
+		// Connexion à la base de donnée
+		MongoDB mongo = new MongoDB("test", "objets"); // db et collection
+		
+		// Obtention de tous les objets
+		 cursor = mongo.ObtentionListe();
 
+		// Boucle sur tous les objets
 		try {
 		    while (cursor.hasNext()) {
-		    	
-		    	i = i +1;
-		    	LOGGER.info(Integer.toString(i));
-		    	
-		    	Document objet = cursor.next();
-				LOGGER.info(objet.toJson());
+		    	Document objet = cursor.next(); // Deplacement du curseur
+		    	// Deserialisation
 				Objets objet_java = gson.fromJson(objet.toJson(),Objets.class);
-
-				LOGGER.info("Before add");
+				// Ajout de l'objet dans la liste des objets
 				listObjets.add(objet_java);
-				LOGGER.info("After add");
 		    }
 		} finally {
 		    cursor.close();
 		}
-		LOGGER.info("Serialization");
 
-		// myDoc = collection.find().first();
+		// Serialisation
 		String resp = gson.toJson(listObjets);
 		
-		// Serialization
-		//String objets_response = gson.toJson(listObjets);
-		// return http code  200
+		mongo.Deconnexion();
 		return Response.status(200).entity(resp).build();		
 	}
 	
@@ -98,28 +83,37 @@ public class ObjetsEndpoints {
 	@Produces("application/json")
 	public Response GetObjectbyId(@PathParam("idobjet") final String idobjet){
 		
-		MongoClient mongoClient = new MongoClient();
-		MongoDatabase db = mongoClient.getDatabase("test");
-		MongoCollection<Document> collection = db.getCollection("objets");
-		LOGGER.info("test1");
-		
-		_id id_objet = new _id();
-		id_objet.set$oid(idobjet);
-		
-		Document myDoc = collection.find(eq("_id", new ObjectId(idobjet))).first();
-		
-		String json = myDoc.toJson();
-		
+		// Initialisation
+        //gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
 		Gson gson = new Gson();
+		String objets_response;
+		Objets objet = new Objets();
+		
+		// Connexion à la base de donnée
+		MongoDB mongo = new MongoDB("test", "objets"); // db et collection
+		
+		// Selection de l'objet en fonction de l'id en paramètre
+		Document myDoc = mongo.SelectionParId(idobjet);
+		
+		// Deserialization
+		objet = gson.fromJson(myDoc.toJson(),Objets.class);
 
-		Objets objet = gson.fromJson(myDoc.toJson(),Objets.class);
-
-		String objets_response = gson.toJson(objet);
-
-		LOGGER.info("test1");
-
-		return Response.status(200).entity(objets_response).build();		
-
+		// Serialization
+		if (objet.getDisp_annee() == null) {
+			// Si la date est à afficher telle quelle
+			objets_response = gson.toJson(objet);
+		}
+		else {
+			// Si la date est à afficher est un siècle
+			ObjetsBis objetbis = new ObjetsBis(objet);
+			objets_response = gson.toJson(objetbis);
+		}
+		
+		// Deconnexion
+		mongo.Deconnexion();
+		
+		return Response.status(200).entity(objets_response).build();	
 	}
 
 	

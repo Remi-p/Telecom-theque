@@ -1,6 +1,9 @@
 package fr.enseirb.t2.telecomtheque.models;
 
-import java.util.List;
+import static com.mongodb.client.model.Filters.eq;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class VitrineReturn {
 	
@@ -8,6 +11,17 @@ public class VitrineReturn {
 	private String nom;
 	private int nb_obj;
 	private String cover;
+	
+
+	public VitrineReturn(Vitrines vitrine) {
+		super();
+		
+		this.id = vitrine.get_id().get$oid();
+		this.nom = vitrine.getNom();
+		this.nb_obj = vitrine.getObjets().size();
+		
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -1,7 +1,5 @@
 package fr.enseirb.t2.telecomtheque.endpoints;
 
-import static com.mongodb.client.model.Filters.eq;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,21 +11,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-
-import fr.enseirb.t2.telecomtheque.models.ListVitrines;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.Objets;
 import fr.enseirb.t2.telecomtheque.models.VitrineObjetsReturn;
 import fr.enseirb.t2.telecomtheque.models.VitrineReturn;
 import fr.enseirb.t2.telecomtheque.models.Vitrines;
-import fr.enseirb.t2.telecomtheque.models._id;
+import fr.enseirb.t2.telecomtheque.requests.MongoDB;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  * Gestion des endpoints relatifs aux vitrines
@@ -39,54 +31,61 @@ public class VitrinesEndpoints {
     Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
 	/**
-	 * GET des vitrines
+	 * GET de toutes les vitrines
 	 *
-	 * @param  
-	 * @throws 
-	 * @return
+	 * @return Objet Response contenant le Code de retour de la requête HTTP et l'entité en JSON
 	 */
 	@GET
 	@Produces("application/json")
 	public Response GetVitrines(){
 		
-		MongoClient mongoClient = new MongoClient();
-		MongoDatabase db = mongoClient.getDatabase("test");
-		MongoCollection<Document> vitrines_collection = db.getCollection("vitrines");	
-		MongoCollection<Document> objets_collection = db.getCollection("objets");	
-
-		
-		// De-serialization
+		// Initialisation
 		Gson gson = new Gson();
-		
 		List<VitrineReturn> listVitrinesReturn = new ArrayList<VitrineReturn>();
-		MongoCursor<Document> cursor = vitrines_collection.find().iterator();
+		MongoCursor<Document> cursor_vitrines;
+		VitrineReturn vit_return; // Modèle de vitrine retourné
+		
+		// Connexion à la base de donnée
+		MongoDB mongo_vitrines = new MongoDB("test", "vitrines"); // db et collection
+		MongoDB mongo_objets = new MongoDB("test", "objets"); // db et collection
+
+		// Recuperation de toutes les vitrines
+		cursor_vitrines = mongo_vitrines.ObtentionListe();
 		
 		// Boucle sur les vitrines
 		try {
-		    while (cursor.hasNext()) {
+		    while (cursor_vitrines.hasNext()) {
 		    			    	
-		    	Document vitrine = cursor.next();
+		    	Document vitrine = cursor_vitrines.next();
+		    	
 		    	// Deserialization of the vitrine
 				Vitrines objet_java = gson.fromJson(vitrine.toJson(),Vitrines.class);
 				
-				VitrineReturn vit_return = new VitrineReturn();
-				vit_return.setId(objet_java.get_id().get$oid());
-				vit_return.setNom(objet_java.getNom());
-				vit_return.setNb_obj(objet_java.getObjets().size());
+				// Création du nmodèle de sortie de vitrine
+				vit_return = new VitrineReturn(objet_java);
+					
+					// Obtention du champs cover à partir du premier objet
+					Document objet_for_cover = mongo_objets.SelectionParId(objet_java.getObjets().get(0));
+					// Serialisation de cet objet
+					Objets objet = gson.fromJson(objet_for_cover.toJson(),Objets.class);
 				
-				Document objet_for_cover = objets_collection.find(eq("_id", new ObjectId(objet_java.getObjets().get(0)))).first();
-				Objets objet = gson.fromJson(objet_for_cover.toJson(),Objets.class);
-				
+				// Remplissage du cover
 				vit_return.setCover(objet.getImgs().get(0).getSrc());
 				
+				// Ajout de la vitrine à la liste des vitrines
 				listVitrinesReturn.add(vit_return);
 		    }
 		} finally {
-		    cursor.close();
+		    cursor_vitrines.close();
 		}
 		
+		// Serialisation de la liste des vitrines
 		String resp = gson.toJson(listVitrinesReturn);
-
+		
+		// Deconnexion des mongo
+		mongo_objets.Deconnexion();
+		mongo_vitrines.Deconnexion();
+		
 		return Response.status(200).entity(resp).build();		
 	}
 	
@@ -102,19 +101,25 @@ public class VitrinesEndpoints {
 	@Produces("application/json")
 	public Response GetVitrine(@PathParam("idvitrine") final String idvitrine){
 		
-		MongoClient mongoClient = new MongoClient();
-		MongoDatabase db = mongoClient.getDatabase("test");
-		MongoCollection<Document> vitrines_collection = db.getCollection("vitrines");
-		MongoCollection<Document> objets_collection = db.getCollection("objets");
-
-
-		Document myDoc = vitrines_collection.find(eq("_id", new ObjectId(idvitrine))).first();
-		String json = myDoc.toJson();
+		// Initialisation
 		Gson gson = new Gson();
-		Vitrines vitrine = gson.fromJson(myDoc.toJson(),Vitrines.class);
-
-		
+		Document doc_vitrine;
+		Vitrines vitrine;
 		VitrineObjetsReturn vit_return = new VitrineObjetsReturn();
+		
+		// Connexion à la base de donnée
+		MongoDB mongo_vitrines = new MongoDB("test", "vitrines"); // db et collection
+		MongoDB mongo_objets = new MongoDB("test", "objets"); // db et collection
+
+		// Obtention de la vitrine en fonction de l'id en paramètre
+		doc_vitrine = mongo_vitrines.SelectionParId(idvitrine);
+		
+		// Deserialisation de la vitrine
+		vitrine = gson.fromJson(doc_vitrine.toJson(),Vitrines.class);
+
+		// Remplissage de l'objet qui sera retourné
+		// contenant les informations sur les vitrines
+		// et les objets de cette vitrine
 		vit_return.setVitrine(vitrine.get_id().get$oid());
 		vit_return.setNom(vitrine.getNom());
 		
@@ -122,22 +127,28 @@ public class VitrinesEndpoints {
 		 for(String objs_id:vitrine.getObjets()) {
 			
 			ObjetReturn obj_return = new ObjetReturn();
-			
 			obj_return.setId(objs_id);
 			
-			Document objet_for_cover = objets_collection.find(eq("_id", new ObjectId(objs_id))).first();
-			Objets objet = gson.fromJson(objet_for_cover.toJson(),Objets.class);
+				// Obtention du champs cover à partir du premier objet
+				Document objet_for_cover = mongo_objets.SelectionParId(objs_id);
+				// Serialisation de cet objet
+				Objets objet = gson.fromJson(objet_for_cover.toJson(),Objets.class);
+				
+				obj_return.setNom(objet.getNom());
+				obj_return.setAnnee(objet.getAnnee());
+				obj_return.setCover(objet.getImgs().get(0).getSrc());
 			
-			obj_return.setNom(objet.getNom());
-			obj_return.setAnnee(objet.getAnnee());
-			obj_return.setCover(objet.getImgs().get(0).getSrc());
-			
+			// Ajout de cet objet à la liste des objets
 			vit_return.getObjets().add(obj_return);
 		 }
 		
-		
+		// Serialisation de l'objet retourné
 		String vitrines_response = gson.toJson(vit_return);
 
+		// Deconnexion des mongos
+		mongo_objets.Deconnexion();
+		mongo_vitrines.Deconnexion();
+		
 		return Response.status(200).entity(vitrines_response).build();	
 	}
 }
