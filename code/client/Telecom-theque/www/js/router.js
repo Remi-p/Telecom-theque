@@ -10,7 +10,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    controller: 'AllCtrl' // Un controlleur pour les controller tous
   })
 
   // Each tab has its own nav history stack:

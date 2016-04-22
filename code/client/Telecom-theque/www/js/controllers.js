@@ -1,5 +1,9 @@
 angular.module('starter.controllers', [])
 
+.controller('AllCtrl', function($scope, $ionicLoading) {
+    
+})
+
 .controller('HomeCtrl', function($scope, $ionicTabsDelegate) {
     $scope.selectTabWithIndex = function(index) {
         $ionicTabsDelegate.select(index);
@@ -47,11 +51,14 @@ angular.module('starter.controllers', [])
   };
 });
 
+
+
+
 /* ===================== Fetch des vitrines ========================= */
 
-app.controller("VitrinesCtrl", function($scope, GetJSON) {
+app.controller("VitrinesCtrl", function($scope, GetJSON, $ionicLoading) {
     
-    GetJSON.getdata("vitrines/").then(function(d) {
+    GetJSON.getdata("vitrines/", $ionicLoading).then(function(d) {
         $scope.vitrines = d;
     });
     
@@ -60,9 +67,9 @@ app.controller("VitrinesCtrl", function($scope, GetJSON) {
 
 /* ================ Fetch des objets pour une vitrine =============== */
 
-app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
+app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON, $ionicLoading) {
     
-    GetJSON.getdata("vitrines/" + $stateParams.id).then(function(d) {
+    GetJSON.getdata("vitrines/" + $stateParams.id, $ionicLoading).then(function(d) {
         $scope.vitrine = d;
     });
     
@@ -71,9 +78,9 @@ app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
 
 /* ======================== Fetch d'un objet ======================== */
 
-app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate) {
+app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate, $ionicLoading) {
     
-    GetJSON.getdata("objets/" + $stateParams.id).then(function(d) {
+    GetJSON.getdata("objets/" + $stateParams.id, $ionicLoading).then(function(d) {
         $scope.objet = d;
         
         // Update des slides ; cf http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/

@@ -2,7 +2,17 @@ angular.module('starter.services', [])
 
 // Service de récupération de données
 
-.factory('GetJSON', function($http) {
+.factory('GetJSON', function($http, $ionicLoading) {
+    
+    // Loading tant que les données ne sont pas récupérées
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+    
     
     var url = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
     
@@ -10,6 +20,7 @@ angular.module('starter.services', [])
         getdata: function(route) {
             
             promise = $http.get(url + route).then(function(response) {
+                $ionicLoading.hide(); // Fin du loading
                 return response.data;
             });
             

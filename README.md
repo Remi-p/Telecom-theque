@@ -32,6 +32,10 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 
 # Fonctionnalités supplémentaires
 
+## Fonctionnalités serveur
+
+* Endpoint renvoyant la date minimum & maximum des objets de la BDD (pour la sélection de la période)
+
 ## Fonctionnalités client
 
 * Présentation des images d'un objet avec un slider
