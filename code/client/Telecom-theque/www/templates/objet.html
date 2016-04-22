@@ -5,17 +5,14 @@
         <ion-slide-box on-slide-changed="onSlideChanged(index)" active-slide="currentIndex">
             <ion-slide ng-repeat="elm in objet.imgs">
                 <div class="item item-image" style="background-image:url({{elm.src}})">
-<!--
-                    <img src="{{elm.src}}"/>
--->
+                    <!-- Utilisation de l'image en background pour la centrer -->
                 </div>
             </div>
         </ion-slide-box>
         
         <h2>{{objet.nom}}</h2>
         
-        
-        <div class="card">
+        <div class="card"> <!-- Desc + date -->
             <div class="item item-text-wrap item-outline item-light">
                 <p>
                 <button class="button button-positive button-float-left" href="#">{{objet.annee || 'Date inconnue'}}</button>

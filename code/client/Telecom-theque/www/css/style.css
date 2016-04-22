@@ -1,11 +1,13 @@
+/* Style personnel en + de ceux proposés par Ionic */
+
 .vitrines {
     margin-bottom:5px;
     margin-top:5px;
 }
 
-    .vitrines a {
-        background-color: #DCE9FF !important;
-    }
+.vitrines a {
+    background-color: #DCE9FF !important;
+}
 
 .button-float-left {
     float:left;
@@ -26,24 +28,6 @@
   -webkit-transform: translateX(-50%) translateY(-50%);
 }
 
-/* Redimensionne les images du sliders */
-/*
-.slider {
-    height:0;
-    padding-bottom:100%;
-}
-.slider-slide {
-  padding-bottom:100%;
-}
-.slider-slide .item-image {
-    width:100%;
-    height:0;
-    padding-bottom:100%;
-}
-.slider-slide .item-image img {
-    object-fit:contain;
-}
-*/
 .slider-slide .item-image {
     padding-bottom:100%;
     background-position:center center;
@@ -88,7 +72,7 @@ ion-tabs p, .button-home {
   animation-duration:0;
 }
 
-/* === QRCODE === */
+/* =========================== QRCODE =============================== */
 
 .item-input input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;

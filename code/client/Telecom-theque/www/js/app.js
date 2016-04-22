@@ -23,3 +23,5 @@ app.run(function($ionicPlatform) {
     }
   });
 });
+
+// Remarque : le reste du Javascript est réparti dans les autres fichiers
