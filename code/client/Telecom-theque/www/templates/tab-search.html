@@ -6,9 +6,9 @@
     
 	<label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-click="validSearch(q.nom,0,2016)">
+      <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,0,2016)">
+      <ion-spinner icon="ripple" class="spinner-positive" ng-hide="spinner"></ion-spinner>
   </label>
-  <input type="text" id="example_id" name="range" value="" />
   <script>
 
     $(function () {
