@@ -3,8 +3,6 @@ package fr.enseirb.t2.telecomtheque.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-
 public class ObjetsBis {
 
 	private _id _id;

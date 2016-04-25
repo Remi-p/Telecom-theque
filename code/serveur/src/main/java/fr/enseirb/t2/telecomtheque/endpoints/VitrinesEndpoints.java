@@ -15,7 +15,6 @@ import com.mongodb.client.MongoCursor;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
-import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
 import fr.enseirb.t2.telecomtheque.models.VitrineObjetsReturn;
 import fr.enseirb.t2.telecomtheque.models.VitrineReturn;
 import fr.enseirb.t2.telecomtheque.models.Vitrines;

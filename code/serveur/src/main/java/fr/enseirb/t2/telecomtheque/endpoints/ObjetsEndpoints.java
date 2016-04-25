@@ -14,10 +14,10 @@ import javax.ws.rs.core.Response;
 import org.bson.Document;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
 import com.mongodb.client.MongoCursor;
 
 import fr.enseirb.t2.telecomtheque.config.Config;
+import fr.enseirb.t2.telecomtheque.models.MinMaxAnnees;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
@@ -95,7 +95,7 @@ public class ObjetsEndpoints {
 		Objets objet = new Objets();
 		
 		// Connexion à la base de donnée
-		MongoDB mongo = new MongoDB("test", "objets"); // db et collection
+		MongoDB mongo = new MongoDB(Config.DB, Config.OBJETS); // db et collection
 		
 		// Selection de l'objet en fonction de l'id en paramètre
 		Document myDoc = mongo.SelectionParId(idobjet);
@@ -134,10 +134,6 @@ public class ObjetsEndpoints {
 	public Response GetRechercheObjet(@QueryParam("nom") String nom,
 									  @QueryParam("amin") int amin,
 									  @QueryParam("amax") int amax){
-		
-		LOGGER.info(nom);
-		LOGGER.info(Integer.toString(amin));
-		LOGGER.info(Integer.toString(amax));
 		
 		// Initialisation
 		Gson gson = new Gson();
@@ -182,6 +178,37 @@ public class ObjetsEndpoints {
 
 		// Serialisation
 		String resp = gson.toJson(listObjets);
+		
+		mongo.Deconnexion();
+		return Response.status(200).entity(resp).build();		
+	}
+	
+	/**
+	 * GET min and max of date objets
+	 *
+	 **/
+	@GET
+	@Path("/dates")
+	@Produces("application/json")
+	public Response GetRangeAnnes(){
+		
+		// Initialisation
+		Gson gson = new Gson();
+		MinMaxAnnees dates = new MinMaxAnnees();
+		
+		// Connexion à la base de donnée
+		MongoDB mongo = new MongoDB(Config.DB, Config.OBJETS); // db et collection
+
+		// Cherche les années minimum et maximums
+		int amin = gson.fromJson(mongo.MinAnnee().toJson(),Objets.class).getAnnee();
+		int amax = gson.fromJson(mongo.MaxAnnee().toJson(),Objets.class).getAnnee();
+		
+		// Rempli l'objet à retourner
+		dates.setAmin(amin);
+		dates.setAmin(amax);
+
+		// Serialisation
+		String resp = gson.toJson(dates);
 		
 		mongo.Deconnexion();
 		return Response.status(200).entity(resp).build();		

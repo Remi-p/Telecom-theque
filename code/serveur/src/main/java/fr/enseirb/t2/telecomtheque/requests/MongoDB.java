@@ -6,9 +6,11 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Projections;
 
 public class MongoDB {
 	
@@ -79,6 +81,50 @@ public class MongoDB {
 	 * pour afficher le curseur de séléction lors d'une recherche
 	 */
 	public void DatesPourCurseurs() {
+		
+	}
+	
+	/**
+	 * Retourne l'année minimum des objets
+	 * 		  
+	 * @return Objet de type Document
+	 */
+	public Document MinAnnee() {
+		
+		Document first = null;
+		
+		FindIterable<Document> min = this.collection.find()
+				.limit(1)
+				.sort(new Document("annee", 1));
+		
+        for (Document doc : min) {
+        	first = doc;
+        	break;
+        }
+        
+        return first;
+		
+	}
+	
+	/**
+	 * Retourne l'année maximum des objets
+	 * 		  
+	 * @return Objet de type Document
+	 */
+	public Document MaxAnnee() {
+		
+		Document first = null;
+		
+		FindIterable<Document> min = this.collection.find()
+				.limit(1)
+				.sort(new Document("annee", -1));
+		
+        for (Document doc : min) {
+        	first = doc;
+        	break;
+        }
+        
+        return first;
 		
 	}
 	
