@@ -194,6 +194,8 @@ public class ObjetsEndpoints {
 		
 		// Initialisation
 		Gson gson = new Gson();
+		Gson gson2 = new Gson();
+
 		MinMaxAnnees dates = new MinMaxAnnees();
 		
 		// Connexion à la base de donnée
@@ -201,11 +203,11 @@ public class ObjetsEndpoints {
 
 		// Cherche les années minimum et maximums
 		int amin = gson.fromJson(mongo.MinAnnee().toJson(),Objets.class).getAnnee();
-		int amax = gson.fromJson(mongo.MaxAnnee().toJson(),Objets.class).getAnnee();
+		int amax = gson2.fromJson(mongo.MaxAnnee().toJson(),Objets.class).getAnnee();
 		
 		// Rempli l'objet à retourner
 		dates.setAmin(amin);
-		dates.setAmin(amax);
+		dates.setAmax(amax);
 
 		// Serialisation
 		String resp = gson.toJson(dates);

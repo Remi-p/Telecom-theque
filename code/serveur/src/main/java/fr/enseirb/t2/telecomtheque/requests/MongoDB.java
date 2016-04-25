@@ -115,11 +115,11 @@ public class MongoDB {
 		
 		Document first = null;
 		
-		FindIterable<Document> min = this.collection.find()
+		FindIterable<Document> max = this.collection.find()
 				.limit(1)
 				.sort(new Document("annee", -1));
 		
-        for (Document doc : min) {
+        for (Document doc : max) {
         	first = doc;
         	break;
         }
