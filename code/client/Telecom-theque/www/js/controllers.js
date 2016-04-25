@@ -97,6 +97,12 @@ var delay = (function(){
 })();
 
 app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
+
+    //Permet d'obtenir intervalle la date min et max des objets 
+
+    GetJSON.getdata("objets/dates").then(function(d){
+        $scope.dates=d;
+    });
    
     $scope.spinner = true; // Cache le loader
 
@@ -118,13 +124,9 @@ app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
         }, 400 );
     }
     
-    //Filtre siècle
-   // $scope.IsVisible = false;
-   // $scope.showHide = function () {
-  //  $scope.IsVisible = $scope.IsVisible ? false : true;
-   // }
+
    //$("#example_id").ionRangeSlider();
-   
+
     //Qr code
     $scope.lireCode=function(){
         $cordovaBarcodeScanner.scan().then( function(image_a_scan){

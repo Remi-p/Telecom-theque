@@ -6,11 +6,10 @@
     
     <label class="item item-input"> <!-- Recherche -->
         <i class="icon ion-search placeholder-icon"></i>
-        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,0,2016)">
+        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,{{dates.amin}},{{dates.amax}})">
         <!-- Loader : -->
         <ion-spinner icon="ripple" class="spinner-positive" ng-hide="spinner"></ion-spinner>
     </label>
-    
   <script>
 
     $(function () {
@@ -30,21 +29,9 @@
     });
 </script>
 
-  <button class="button button-block button-outline button-positive button-home" ng-click="validSearch(q.nom,0,2016)">Chercher</button>
-   <!--   <button class="button button-block button-outline button-positive icon-left ion-funnel button-home" ng-click="showHide()">Filtrer par siècle</button>
-    <input type="text" id="example_id" name="example_name" value="" />
-   <div class="check-element animate-show" ng-show="IsVisible">
-    <ion-list>
-        <ion-checkbox ng-model='q.annee' ng-true-value='18' ng-false-value='' >19ième siècle</ion-checkbox>
-        <ion-checkbox ng-model='q.annee' ng-true-value='19' ng-false-value='' >20ième siècle</ion-checkbox>
-        <ion-checkbox ng-model='q.annee' ng-true-value='20' ng-false-value='' >21ième siècle</ion-checkbox>
-    </ion-list>
-    <br>
-    </div> -->
-    
     <!-- Résultat de la recherche -->
     <ion-list>
-       	<a ng-repeat="elm in search" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
+       	<a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
         	<div class="center-cropped item-image">
                 <img src="{{elm.cover}}"> <!-- tmp -->
            	</div>
@@ -52,6 +39,8 @@
         	<p>{{elm.annee || 'Date inconnue'}}</p>
         </a>
    	</ion-list>
-    
+    <p ng-if="results.length == 0 && q.nom.length>2">
+          Pas de résultat trouvé ...
+    </p>
   </ion-content>
 </ion-view>
