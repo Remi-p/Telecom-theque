@@ -1,34 +1,27 @@
 <ion-view view-title="Rechercher un objet">
   <ion-content class="padding"> 
-    <button class="button button-block button-outline button-royal icon-left ion-qr-scanner button-home" href="#/tab/qrcode" ng-click="lireCode()">
+    <button class="button button-block button-outline button-royal icon-left ion-qr-scanner button-home" ng-click="lireCode()">
       Scanner un QR-Code
     </button>
     
     <label class="item item-input"> <!-- Recherche -->
         <i class="icon ion-search placeholder-icon"></i>
-        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,{{dates.amin}},{{dates.amax}})">
+        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,{{from}},{{to}})">
         <!-- Loader : -->
         <ion-spinner icon="ripple" class="spinner-positive" ng-hide="spinner"></ion-spinner>
     </label>
-  <script>
-
-    $(function () {
-
-        $("#range").ionRangeSlider({
-            hide_min_max: true,
-            keyboard: true,
-            min: 0,
-            max: 5000,
-            from: 1000,
-            to: 4000,
-            type: 'double',
-            step: 1,
-            grid: true
-        });
-
-    });
-</script>
-
+    <button class="button button-block button-outline button-positive icon-left ion-funnel button-home" ng-click="showHide()">Filtrer par année</button>
+    <div class="check-element animate-show" ng-show="IsVisible">
+        <div class="list">
+        <div class="item item-divider">Année:</div>
+        <div class="item range range-positive">
+          <div class="range-label">{{from}}</div>
+          <ui-multi-range ng-step="1" ng-min="yearmin" ng-max="yearmax" ng-model-min="from" ng-model-max="to"></ui-multi-range>
+          <div class="range-label">{{to}}</div>
+        </div>
+      </div>
+    </div> 
+    <p>Année sélectionée : {{from}}-{{to}}</p>
     <!-- Résultat de la recherche -->
     <ion-list>
        	<a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
@@ -39,8 +32,13 @@
         	<p>{{elm.annee || 'Date inconnue'}}</p>
         </a>
    	</ion-list>
-    <p ng-if="results.length == 0 && q.nom.length>2">
-          Pas de résultat trouvé ...
-    </p>
+    <div ng-if="results.length==0">
+      <div class="item item-text-wrap condition-anim"  ng-if="q.nom.length<=2" ng-show="q.nom.length<=2">
+        Entrer 3 caractéres au minimum...
+      </div>
+      <div class="item item-text-wrap condition-anim"  ng-if="q.nom.length>2" ng-hide="q.nom.length<=2">
+        Pas de résultat trouvé...
+      </div>
+  </div> 
   </ion-content>
 </ion-view>

@@ -96,14 +96,84 @@ var delay = (function(){
     };
 })();
 
+//http://codepen.io/shaoner/pen/ZWoYgE?editors=1010
+//Fonction utilisée par le curseur
+function MultiRangeDirective($compile) {
+  
+  var directive = {
+    restrict: 'E',
+    scope: {
+      ngModelMin: '=',
+      ngModelMax: '=',
+      ngMin: '=',
+      ngMax: '=',
+      ngStep: '='
+    
+    },
+    link: link
+  };
+
+  return directive;
+
+  ////////////////////
+
+  function link($scope, $element, $attrs) {
+    var min, max, step, $inputMin = angular.element('<input type="range">'),
+      $inputMax;
+    
+    if (typeof $scope.ngMin != 'undefined') {
+      min = $scope.ngMin;
+      $inputMin.attr('min', min);
+    } else {
+      min = 0;
+    }
+    if (typeof $scope.ngMax != 'undefined') {
+      max = $scope.ngMax;
+      $inputMin.attr('max', max);
+    } else {
+      max = 2016;
+    }
+    if (typeof $scope.ngStep != 'undefined') {
+      $inputMin.attr('step', $scope.ngStep);
+    }else{
+      step=1;
+    }
+    $inputMax = $inputMin.clone();
+    $inputMin.attr('ng-model', 'ngModelMin');
+    $inputMax.attr('ng-model', 'ngModelMax');
+    $compile($inputMin)($scope);
+    $compile($inputMax)($scope);
+    $element.append($inputMin).append($inputMax);
+    $scope.ngModelMin = $scope.ngModelMin || min;
+    $scope.ngModelMax = $scope.ngModelMax || max;
+
+    $scope.$watch('ngModelMin', function(newVal, oldVal) {
+      if (newVal > $scope.ngModelMax) {
+        $scope.ngModelMin = oldVal;
+      }
+    });
+
+    $scope.$watch('ngModelMax', function(newVal, oldVal) {
+      if (newVal < $scope.ngModelMin) {
+        $scope.ngModelMax = oldVal;
+      }
+    });
+  }
+}
+
+
+
 app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
 
     //Permet d'obtenir intervalle la date min et max des objets 
-
-    GetJSON.getdata("objets/dates").then(function(d){
-        $scope.dates=d;
+        GetJSON.getdata("objets/dates").then(function(d){
+        //$scope.yearmin=d.amin;
+        //$scope.yearmax=d.amax;
+        //$scope.from = d.min;
+        //$scope.to = d.max;
     });
-   
+
+
     $scope.spinner = true; // Cache le loader
 
     $scope.validSearch=function(param,param2,param3){
@@ -116,16 +186,27 @@ app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
             
                 $scope.spinner = false; // Affichage du 'loading'
             
-                GetJSON.getdata("objets/recherche?nom="+param+"&amim="+param2+"&amax="+param3).then(function(d) {
+                GetJSON.getdata("objets/recherche?nom="+param+"&amin="+param2+"&amax="+param3).then(function(d) {
                     $scope.search= d;
                     $scope.spinner = true;
                 });
             }
         }, 400 );
     }
-    
+    //bouton filtrer par annee
 
-   //$("#example_id").ionRangeSlider();
+    $scope.IsVisible = false;
+    $scope.showHide = function () {
+      $scope.IsVisible = $scope.IsVisible ? false : true;
+    }
+
+    //Curseur
+    $scope.yearmin =1900;
+    $scope.yearmax =1990;
+    $scope.from =1900;
+    $scope.to =1990;
+
+    console.log("yolo");
 
     //Qr code
     $scope.lireCode=function(){
@@ -135,7 +216,12 @@ app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
             alert("Erreur !"+error)
         });
     }
-
- 
 });
+app.directive('uiMultiRange', MultiRangeDirective);
+
+
+
+
+
+
 
