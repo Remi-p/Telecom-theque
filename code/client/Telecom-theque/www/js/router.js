@@ -50,14 +50,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // Récupération d'un obj
     .state('tab.objet', {
         url: '/objet/:id',
-            views: {
+        views: {
             'tab-vitrines': {
                 templateUrl: 'templates/objet.html',
                 controller: 'ObjetCtrl'
             }
         }
     })
-
     .state('tab.search', {
         url: '/search',
         views: {
@@ -65,6 +64,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'templates/tab-search.html',
                 controller: 'SearchCtrl'
             }
+        },
+        resolve: {
+            useYear: function(GetJSON){
+                return GetJSON.getdata("objets/dates");
+
+            }
+            /*useYear : function($http,$templateCache){
+            // $http returns a promise for the url data
+            return $http({method: 'GET', url: 'http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/dates',cache: $templateCache});
+            }*/
         }
     });
 

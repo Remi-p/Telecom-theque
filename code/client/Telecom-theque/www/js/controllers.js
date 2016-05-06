@@ -103,12 +103,12 @@ function MultiRangeDirective($compile) {
   var directive = {
     restrict: 'E',
     scope: {
+
       ngModelMin: '=',
       ngModelMax: '=',
       ngMin: '=',
       ngMax: '=',
       ngStep: '='
-    
     },
     link: link
   };
@@ -156,6 +156,7 @@ function MultiRangeDirective($compile) {
     $scope.$watch('ngModelMax', function(newVal, oldVal) {
       if (newVal < $scope.ngModelMin) {
         $scope.ngModelMax = oldVal;
+
       }
     });
   }
@@ -163,16 +164,20 @@ function MultiRangeDirective($compile) {
 
 
 
-app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
+app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJSON){
+   //Permet d'obtenir intervalle la date min et max des objets dynamiquement 
 
-    //Permet d'obtenir intervalle la date min et max des objets 
-        GetJSON.getdata("objets/dates").then(function(d){
-        //$scope.yearmin=d.amin;
-        //$scope.yearmax=d.amax;
-        //$scope.from = d.min;
-        //$scope.to = d.max;
-    });
+   var annees=useYear;
+   console.log(annees);
+   $scope.yearmin =annees.amin;
+   $scope.yearmax =annees.amax;
+   $scope.from =annees.amin;
+   $scope.to =annees.amax;
 
+   //$scope.yearmin =annees.data.amin;
+   //$scope.yearmax =annees.data.amax;
+   //$scope.from =annees.data.amin;
+   //$scope.to =annees.data.amax;
 
     $scope.spinner = true; // Cache le loader
 
@@ -185,43 +190,45 @@ app.controller("SearchCtrl",function($scope,$cordovaBarcodeScanner,GetJSON){
             if (param.length > 2) {
             
                 $scope.spinner = false; // Affichage du 'loading'
-            
+                
                 GetJSON.getdata("objets/recherche?nom="+param+"&amin="+param2+"&amax="+param3).then(function(d) {
                     $scope.search= d;
                     $scope.spinner = true;
+                    $yearminsearch=param2;
+                    $yearmaxsearch=param3;
                 });
             }
         }, 400 );
     }
-    //bouton filtrer par annee
 
+
+    //afficher ou cacher le filtre 
     $scope.IsVisible = false;
     $scope.showHide = function () {
       $scope.IsVisible = $scope.IsVisible ? false : true;
     }
 
     //Curseur
-    $scope.yearmin =1900;
-    $scope.yearmax =1990;
-    $scope.from =1900;
-    $scope.to =1990;
-
-    console.log("yolo");
+    //$scope.yearmin =1900;
+    //$scope.yearmax =1990;
+    //$scope.from =1900;
+    //$scope.to =1990;
 
     //Qr code
     $scope.lireCode=function(){
-        $cordovaBarcodeScanner.scan().then( function(image_a_scan){
-            alert(image_a_scan.text)
-        },function(error){
-            alert("Erreur !"+error)
-        });
+      //alert("coucou")
+      $cordovaBarcodeScanner
+      .scan()
+      .then(function(barcodeData) {
+        
+      }, function(error) {
+        alert("Error : " + error)
+      });
     }
+
 });
+
 app.directive('uiMultiRange', MultiRangeDirective);
-
-
-
-
 
 
 
