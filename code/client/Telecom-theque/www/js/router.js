@@ -75,6 +75,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
             return $http({method: 'GET', url: 'http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/dates',cache: $templateCache});
             }*/
         }
+    })
+    // Récupération d'un obj suite à une recherche
+    // (permet de rester dans l'onglet + historique de nav.)
+    .state('tab.search-obj', {
+        url: '/search/:id',
+        views: {
+            'tab-search': {
+                templateUrl: 'templates/objet.html',
+                controller: 'ObjetCtrl'
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback

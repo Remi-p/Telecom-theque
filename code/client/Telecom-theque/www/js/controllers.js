@@ -44,7 +44,7 @@ angular.module('starter.controllers', [])
           text:"Scanner un QR Code",
           color:"royal",
           icon:"qr-scanner" }];
-          
+
 })
 
 /* ===================== Fetch des vitrines ========================= */
@@ -164,7 +164,7 @@ function MultiRangeDirective($compile) {
 
 
 
-app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJSON){
+app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJSON, $window){
    //Permet d'obtenir intervalle la date min et max des objets dynamiquement 
 
    var annees=useYear;
@@ -216,19 +216,31 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
 
     //Qr code
     $scope.lireCode=function(){
-      //alert("coucou")
-      $cordovaBarcodeScanner
-      .scan()
-      .then(function(barcodeData) {
-        
-      }, function(error) {
-        alert("Error : " + error)
-      });
+        //alert("coucou")
+        $cordovaBarcodeScanner.scan().then(function(barcodeData) {
+            
+            // http://stackoverflow.com/questions/8954637/jquery-regex-validation-for-letters-and-numbers-onlyu
+            var BLIDRegExpression = /^[a-zA-Z0-9]{24}$/;
+
+            if (!BLIDRegExpression.test(barcodeData.text)) {
+                alert('Objet non reconnu');
+                return false;
+            }
+            
+            // Test si l'objet existe
+            GetJSON.getdata("objet/test/" + barcodeData.text).then(function(d) {
+                if (d == "true") {
+                    $window.location.href = '#/tab/search/' + barcodeData.text;
+                }
+                else {
+                    alert('Objet non trouvé');
+                }
+            });
+        }, function(error) {
+            alert("Error : " + error)
+        });
     }
 
 });
 
 app.directive('uiMultiRange', MultiRangeDirective);
-
-
-

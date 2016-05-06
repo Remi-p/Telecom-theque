@@ -21,10 +21,10 @@
         </div>
       </div>
     </div> 
-    <p>Année sélectionée : {{from}}-{{to}}</p>
+    <p>Année sélectionnée : {{from}}-{{to}}</p>
     <!-- Résultat de la recherche -->
     <ion-list>
-       	<a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/objet/{{elm.id}}">
+       	<a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/search/{{elm.id}}">
         	<div class="center-cropped item-image">
             <img src="{{elm.cover}}"> <!-- tmp -->
           </div>
@@ -34,7 +34,7 @@
    	</ion-list>
     <div ng-if="results.length==0">
       <div class="item item-text-wrap condition-anim"  ng-if="q.nom.length<=2" ng-show="q.nom.length<=2">
-        Entrer 3 caractéres au minimum...
+        Entrer 3 caractères au minimum...
       </div>
       <div class="item item-text-wrap condition-anim"  ng-if="q.nom.length>2" ng-hide="q.nom.length<=2">
         Pas de résultat trouvé...
