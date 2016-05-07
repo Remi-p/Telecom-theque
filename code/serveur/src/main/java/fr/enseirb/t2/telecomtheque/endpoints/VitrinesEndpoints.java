@@ -32,9 +32,18 @@ public class VitrinesEndpoints {
     Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
 	/**
-	 * GET de toutes les vitrines
+	 * @api {get} /recherche Retourne les vitrines
+	 * @apiVersion 1.0.0
+	 * @apiName GetVitrines
+	 * @apiGroup Vitrines
 	 *
-	 * @return Objet Response contenant le Code de retour de la requête HTTP et l'entité en JSON
+	 * @apiDescription Retourne toutes les vitrines en Json.
+	 *
+
+	 * @apiExample Exemple :
+	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/vitrines
+	 *
+	 * @apiSuccess {String}   response      Json contenant la liste des vitrines.
 	 */
 	@GET
 	@Produces("application/json")
@@ -91,11 +100,18 @@ public class VitrinesEndpoints {
 	}
 	
 	/**
-	 * GET d'une seule vitrine à partir de son id
+	 * @api {get} /\{test} Retourne une vitrine selon son ID
+	 * @apiVersion 1.0.0
+	 * @apiName GetVitrines
+	 * @apiGroup Vitrines
 	 *
-	 * @param  
-	 * @throws 
-	 * @return
+	 * @apiDescription Retourne une seule vitrine selon son ID.
+	 *
+
+	 * @apiExample Exemple :
+	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/vitrines/{idvitrine}
+	 *
+	 * @apiSuccess {String}   response      Json contenant la liste des vitrines.
 	 */
 	@GET  
 	@Path("/{idvitrine}")

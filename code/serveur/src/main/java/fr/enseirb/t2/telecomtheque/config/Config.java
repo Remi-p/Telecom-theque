@@ -17,6 +17,7 @@ public class Config {
 	public static String DB = "test";
 	public static String OBJETS = "objets";
 	public static String VITRINES = "vitrines";
+	public static String LIKES = "likes";
 
 	// Private constructor : disallow creating instance
 	private Config() {}
