@@ -132,7 +132,40 @@ ui-multi-range input[type=range]:nth-child(2)::-webkit-slider-thumb::before {
   background-color: #ccc;
 }
 
+/* == Firefox == */
+ui-multi-range input[type=range]::-moz-range-thumb {
+  position: relative;
+  cursor: pointer;
+  pointer-events: all;
+}
+ui-multi-range input[type=range]::-moz-range-thumb::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: 100%;
+  width: 2000px;
+  height: 2px;
+}
+ui-multi-range input[type=range]:nth-child(2)::-moz-range-thumb::before {
+  background-color: #ccc;
+}
 
-
-
-
+/* == Explorer == */
+ui-multi-range input[type=range]::-ms-thumb {
+  position: relative;
+  cursor: pointer;
+  pointer-events: all;
+}
+ui-multi-range input[type=range]::-ms-thumb::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: 100%;
+  width: 2000px;
+  height: 2px;
+}
+ui-multi-range input[type=range]:nth-child(2)::-ms-thumb::before {
+  background-color: #ccc;
+}

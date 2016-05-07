@@ -224,20 +224,28 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
 
             if (!BLIDRegExpression.test(barcodeData.text)) {
                 alert('Objet non reconnu');
+                
+                // Pop-up pour Windows Phone :
+                // http://stackoverflow.com/questions/30215520/visual-studio-2015-rc-cordova-app-windows-phone-universal-alert-undefined
+                //~ (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non reconnu")).showAsync().done();
+                
                 return false;
             }
             
             // Test si l'objet existe
-            GetJSON.getdata("objet/test/" + barcodeData.text).then(function(d) {
+            GetJSON.getdata("objets/test/" + barcodeData.text).then(function(d) {
                 if (d == "true") {
                     $window.location.href = '#/tab/search/' + barcodeData.text;
                 }
                 else {
                     alert('Objet non trouvé');
+                    //~ (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non trouvé")).showAsync().done();
                 }
             });
         }, function(error) {
-            alert("Error : " + error)
+            alert("Error : " + error);
+            
+            //~ (new Windows.UI.Popups.MessageDialog("Erreur", error)).showAsync().done();
         });
     }
 
