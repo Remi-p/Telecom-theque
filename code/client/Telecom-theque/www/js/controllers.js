@@ -174,12 +174,16 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
    $scope.from =annees.amin;
    $scope.to =annees.amax;
 
-   //$scope.yearmin =annees.data.amin;
-   //$scope.yearmax =annees.data.amax;
-   //$scope.from =annees.data.amin;
-   //$scope.to =annees.data.amax;
 
     $scope.spinner = true; // Cache le loader
+
+     // afficher rechercher par nom 
+    $scope.IsVisibleName = false;
+
+    $scope.showHideName = function () {
+      $scope.IsVisibleName = $scope.IsVisibleName ? false : true;
+      $scope.IsVisibleYear=false;
+    }
 
     $scope.validSearch=function(param,param2,param3){
         
@@ -202,17 +206,18 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
     }
 
 
-    //afficher ou cacher le filtre 
-    $scope.IsVisible = false;
-    $scope.showHide = function () {
-      $scope.IsVisible = $scope.IsVisible ? false : true;
+    //afficher rechercher par année 
+    $scope.IsVisibleYear = false;
+    $scope.showHideYear = function () {
+      $scope.IsVisibleYear = $scope.IsVisibleYear ? false : true;
+      $scope.IsVisibleName=false;
     }
-
-    //Curseur
-    //$scope.yearmin =1900;
-    //$scope.yearmax =1990;
-    //$scope.from =1900;
-    //$scope.to =1990;
+    //chercher par année 
+    $scope.searchByYear=function(min,max){
+      GetJSON.getdata("objets/recherche?nom=&amin="+min+"&amax="+max).then(function(d) {
+        $scope.search= d;
+      });
+    }
 
     //Qr code
     $scope.lireCode=function(){
