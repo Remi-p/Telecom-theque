@@ -17,9 +17,18 @@
         <div class="card"> <!-- Desc + date -->
             <div class="item item-text-wrap item-outline item-light">
                 <p>
-                <button class="button button-positive button-float-left" href="#">{{objet.annee || 'Date inconnue'}}</button>
+                <button class="button button-calm button-float-left" href="#">{{objet.annee || 'Date inconnue'}}</button>
                 {{objet.description}}
                 </p>
+            </div>
+        </div>
+        <div style="text-align:right;">
+            <div class="button button-outline button-balanced" ng-click="setLike()" ng-switch="nb_like">
+                <i ng-hide="spinnerlike" class="icon ion-ios-heart{{like ? '' : '-outline'}}"></i>
+                <ion-spinner icon="ripple" class="spinner-positive" ng-hide="!spinnerlike"></ion-spinner>
+                <p ng-switch-when="0">Aucun like.</p>
+                <p ng-switch-when="1">1 like.</p>
+                <p ng-switch-default>{{nb_like}} likes.</p>
             </div>
         </div>
     </ion-content>

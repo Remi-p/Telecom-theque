@@ -35,6 +35,8 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 ## Fonctionnalités serveur
 
 * Endpoint renvoyant la date minimum & maximum des objets de la BDD (pour la sélection de la période)
+* Endpoint renvoyant true ou false en fonction de l'existence d'un objet
+* Endpoint gérant le nombre d'étoiles/likes d'un objet
 
 ## Fonctionnalités client
 
@@ -42,3 +44,5 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 * Animations dans l'application
 * Recadrage automatique des images
 * Loader entre les pages
+* Recherche automatiquement lancée après avoir tappé le texte
+* Possibilité de "liker" un objet

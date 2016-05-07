@@ -70,7 +70,9 @@ app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
 
 /* ======================== Fetch d'un objet ======================== */
 // objet.html
-app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate) {
+app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate, Like) {
+    
+    $scope.spinnerlike = false;
     
     GetJSON.getdata("objets/" + $stateParams.id).then(function(d) {
         $scope.objet = d;
@@ -79,6 +81,36 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         // http://ionicframework.com/docs/api/service/%24ionicSlideBoxDelegate/
         $ionicSlideBoxDelegate.update();
     });
+    
+    Like.getlikes($stateParams.id).then(function(d) {
+        // (cf. http://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript)
+        $scope.like = (d.like === 'true');
+        $scope.nb_like = d.nb;
+    });
+    
+    $scope.setLike = function() {
+        
+        // Le spinner remplace l'icône
+        $scope.spinnerlike = true;
+        
+        Like.setlike($stateParams.id).then(function(d) {
+            
+            if (d == "Ajout") {
+                $scope.like = true;
+                $scope.nb_like = $scope.nb_like + 1;
+            }
+            else if (d == "Suppression") {
+                $scope.like = false;
+                $scope.nb_like = $scope.nb_like - 1;
+            }
+            // else (default) : on ne touche à rien
+            
+            $scope.spinnerlike = false;
+            
+        }, function(e) { // Erreur
+            $scope.spinnerlike = false;
+        });
+    };
     
 });
 
@@ -228,11 +260,14 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
             var BLIDRegExpression = /^[a-zA-Z0-9]{24}$/;
 
             if (!BLIDRegExpression.test(barcodeData.text)) {
-                alert('Objet non reconnu');
                 
-                // Pop-up pour Windows Phone :
-                // http://stackoverflow.com/questions/30215520/visual-studio-2015-rc-cordova-app-windows-phone-universal-alert-undefined
-                //~ (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non reconnu")).showAsync().done();
+                if (release == "windows") {
+                    // Pop-up pour Windows Phone :
+                    // http://stackoverflow.com/questions/30215520/visual-studio-2015-rc-cordova-app-windows-phone-universal-alert-undefined
+                    (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non reconnu")).showAsync().done();
+                } else {
+                    alert('Objet non reconnu');
+                }
                 
                 return false;
             }
@@ -243,14 +278,19 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
                     $window.location.href = '#/tab/search/' + barcodeData.text;
                 }
                 else {
-                    alert('Objet non trouvé');
-                    //~ (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non trouvé")).showAsync().done();
+                    if (release == "windows") {
+                        (new Windows.UI.Popups.MessageDialog("Erreur", "Objet non trouvé")).showAsync().done();
+                    } else {
+                        alert('Objet non trouvé');
+                    }
                 }
             });
         }, function(error) {
-            alert("Error : " + error);
-            
-            //~ (new Windows.UI.Popups.MessageDialog("Erreur", error)).showAsync().done();
+            if (release == "windows") {
+                (new Windows.UI.Popups.MessageDialog("Erreur", error)).showAsync().done();
+            } else {
+                alert("Error : " + error);
+            }
         });
     }
 
