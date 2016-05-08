@@ -46,3 +46,4 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 * Loader entre les pages
 * Recherche automatiquement lancée après avoir tappé le texte
 * Possibilité de "liker" un objet
+* Indique lorsqu'aucune connexion n'est disponible
