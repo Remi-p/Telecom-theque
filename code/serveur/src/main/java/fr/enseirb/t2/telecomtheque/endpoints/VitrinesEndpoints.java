@@ -15,6 +15,7 @@ import com.mongodb.client.MongoCursor;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
+import fr.enseirb.t2.telecomtheque.models.RequestError;
 import fr.enseirb.t2.telecomtheque.models.VitrineObjetsReturn;
 import fr.enseirb.t2.telecomtheque.models.VitrineReturn;
 import fr.enseirb.t2.telecomtheque.models.Vitrines;
@@ -32,7 +33,7 @@ public class VitrinesEndpoints {
     Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
 	/**
-	 * @api {get} /recherche Retourne les vitrines
+	 * @api {get} /vitrines Retourner toutes les vitrines
 	 * @apiVersion 1.0.0
 	 * @apiName GetVitrines
 	 * @apiGroup Vitrines
@@ -44,6 +45,28 @@ public class VitrinesEndpoints {
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/vitrines
 	 *
 	 * @apiSuccess {String}   response      Json contenant la liste des vitrines.
+	 * 
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *		[
+	 *  		{
+	 *    		"id": "5716a72e95e5008a634be234",
+	 *    		"nom": "Vidéo",
+	 *    		"nb_obj": 8,
+	 *    		"cover": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
+	 *  		},
+	 *  		{
+	 *    		"id": "5716bfc63a9dd07fbb6f69db",
+	 *    		"nom": "Téléphones",
+	 *    		"nb_obj": 2,
+	 *    		"cover": "http://www.culture.gouv.fr/Wave/image/joconde/0623/m041898_010268_p.jpg"
+	 *  		}
+	 *		]
+	 * @apiErrorExample Error-Response:
+	 *     HTTP/1.1 404 Not Found
+	 *     {
+	 *       "error": "Les collections vitrines ou objets sont vides"
+	 *     }
 	 */
 	@GET
 	@Produces("application/json")
@@ -59,6 +82,11 @@ public class VitrinesEndpoints {
 		MongoDB mongo_vitrines = new MongoDB("test", "vitrines"); // db et collection
 		MongoDB mongo_objets = new MongoDB("test", "objets"); // db et collection
 
+		if(mongo_vitrines.CountDocuments() == 0 || mongo_objets.CountDocuments() == 0) {
+			RequestError error = new RequestError("Les collections vitrines ou objets sont vides");
+			return Response.status(404).entity(gson.toJson(error)).build();
+		}
+		
 		// Recuperation de toutes les vitrines
 		cursor_vitrines = mongo_vitrines.ObtentionListe();
 		
@@ -100,7 +128,7 @@ public class VitrinesEndpoints {
 	}
 	
 	/**
-	 * @api {get} /\{test} Retourne une vitrine selon son ID
+	 * @api {get} /vitrines/:idvitrine Retourner une vitrine selon son ID
 	 * @apiVersion 1.0.0
 	 * @apiName GetVitrines
 	 * @apiGroup Vitrines
@@ -112,6 +140,39 @@ public class VitrinesEndpoints {
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/vitrines/{idvitrine}
 	 *
 	 * @apiSuccess {String}   response      Json contenant la liste des vitrines.
+	 * 
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *		{
+	 *		  "vitrine": "5716a72e95e5008a634be234",
+	 *		  "nom": "Vidéo",
+	 *		  "objets": [
+	 *		    {
+	 *		      "id": "57169ee995e5008a634be22c",
+	 *		      "nom": "Caméra HERNEMAN",
+	 *		      "annee": 1926,
+	 *		      "cover": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
+	 * 	    },
+	 * 		    {
+	 *		      "id": "57169f0295e5008a634be22d",
+	 *		      "nom": "Caméra Pathé",
+	 *		      "annee": "20ème siècle",
+	 *		      "cover": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-1-1_p.jpg"
+	 *		    },
+	 *		    {
+	 *		      "id": "57169f1395e5008a634be22e",
+	 *		      "nom": "Projecteur radiocinéma 35mm 82301 PHILIPS",
+	 *		      "annee": "20ème siècle",
+	 *		      "cover": "http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017600_p.jpg"
+	 *		    }
+	 *		  ]
+	 *		}
+	 *
+	 * @apiErrorExample Error-Response:
+	 *     HTTP/1.1 404 Not Found
+	 *     {
+	 *       "error": "Les collections vitrines ou objets sont vides"
+	 *     }
 	 */
 	@GET  
 	@Path("/{idvitrine}")
@@ -128,6 +189,11 @@ public class VitrinesEndpoints {
 		MongoDB mongo_vitrines = new MongoDB("test", "vitrines"); // db et collection
 		MongoDB mongo_objets = new MongoDB("test", "objets"); // db et collection
 
+		if(mongo_vitrines.CountDocuments() == 0 || mongo_objets.CountDocuments() == 0) {
+			RequestError error = new RequestError("Les collections vitrines ou objets sont vides");
+			return Response.status(404).entity(gson.toJson(error)).build();
+		}
+		
 		// Obtention de la vitrine en fonction de l'id en paramètre
 		doc_vitrine = mongo_vitrines.SelectionParId(idvitrine);
 		

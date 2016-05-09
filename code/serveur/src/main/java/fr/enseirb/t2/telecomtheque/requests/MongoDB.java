@@ -17,6 +17,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.UpdateOptions;
 
 public class MongoDB {
 
@@ -53,7 +54,42 @@ public class MongoDB {
 		Document doc = this.collection.find(eq("_id", new ObjectId(id))).first();
 		return doc;
 	}
+	
+	/**
+	 * Selection d'un document par un paramètre
+	 *
+	 * @param attribute : attribut
+	 * @param value : valeur du champs
 
+	 * 		  
+	 * @return Objet de type Document
+	 */
+	public Document Selection(String attribute, String value) {
+
+		Document doc = this.collection.find(eq(attribute, value)).first();
+		return doc;
+	}
+
+	/**
+	 * Selection d'un document dans une collection par son id
+	 */
+	public boolean TestExistenceLike(String idobjet) {
+		
+		if(TestObjectID(idobjet)) {
+			long count =  this.collection.count(eq("objet", idobjet));
+			if(count>0){
+				return true; 
+			}
+			else {
+				return false;
+			}
+		}
+		else
+			return false;
+	}
+	
+	
+	
 	/**
 	 * Selection d'un document dans une collection par son id
 	 *
@@ -74,6 +110,16 @@ public class MongoDB {
 		}
 		else
 			return false;
+	}
+	
+	/**
+	 * Retourne le nombre d'élément d'un collection
+	  
+	 * @return Entier de type long du nombre de document.
+	 */
+	public long CountDocuments() {
+		
+			return this.collection.count();
 	}
 
 	/**
@@ -169,6 +215,27 @@ public class MongoDB {
 		else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Insert un document dans une collection
+	 */
+	public void Insert(Document doc) {
+		
+		this.collection.insertOne(doc);
+		
+		return;
+	}
+	
+	/**
+	 * Modifier
+	 */
+	public void Update(String id, Document doc) {
+		
+		this.collection.replaceOne(new Document("objet", id),
+			    doc);
+		
+		return;
 	}
 	
 }
