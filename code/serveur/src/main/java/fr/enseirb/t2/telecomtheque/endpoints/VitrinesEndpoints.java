@@ -71,7 +71,7 @@ public class VitrinesEndpoints {
 	@GET
 	@Produces("application/json")
 	public Response GetVitrines(){
-		
+				
 		// Initialisation
 		Gson gson = new Gson();
 		List<VitrineReturn> listVitrinesReturn = new ArrayList<VitrineReturn>();
@@ -83,6 +83,7 @@ public class VitrinesEndpoints {
 		MongoDB mongo_objets = new MongoDB("test", "objets"); // db et collection
 
 		if(mongo_vitrines.CountDocuments() == 0 || mongo_objets.CountDocuments() == 0) {
+			LOGGER.severe("Les collections vitrines ou objets sont vides");
 			RequestError error = new RequestError("Les collections vitrines ou objets sont vides");
 			return Response.status(404).entity(gson.toJson(error)).build();
 		}
@@ -117,6 +118,8 @@ public class VitrinesEndpoints {
 		    cursor_vitrines.close();
 		}
 		
+		LOGGER.info("GET de toutes les vitrines");
+
 		// Serialisation de la liste des vitrines
 		String resp = gson.toJson(listVitrinesReturn);
 		
@@ -130,7 +133,7 @@ public class VitrinesEndpoints {
 	/**
 	 * @api {get} /vitrines/:idvitrine Retourner une vitrine selon son ID
 	 * @apiVersion 1.0.0
-	 * @apiName GetVitrines
+	 * @apiName GetVitrine
 	 * @apiGroup Vitrines
 	 *
 	 * @apiDescription Retourne une seule vitrine selon son ID.
@@ -200,6 +203,8 @@ public class VitrinesEndpoints {
 		// Deserialisation de la vitrine
 		vitrine = gson.fromJson(doc_vitrine.toJson(),Vitrines.class);
 
+		LOGGER.info("GET de la vitrine : "+vitrine.getNom());
+		
 		// Remplissage de l'objet qui sera retourné
 		// contenant les informations sur les vitrines
 		// et les objets de cette vitrine

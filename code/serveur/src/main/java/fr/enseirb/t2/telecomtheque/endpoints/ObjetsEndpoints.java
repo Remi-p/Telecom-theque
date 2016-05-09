@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.mongodb.client.MongoCursor;
 
 import fr.enseirb.t2.telecomtheque.config.Config;
+import fr.enseirb.t2.telecomtheque.models.Existence;
 import fr.enseirb.t2.telecomtheque.models.Likes;
 import fr.enseirb.t2.telecomtheque.models.LikesDoc;
 import fr.enseirb.t2.telecomtheque.models.LikesPost;
@@ -48,17 +49,42 @@ public class ObjetsEndpoints {
 	 * @apiName GetObjets
 	 * @apiGroup Objets
 	 *
-	 * @apiDescription Retourne tous les objets de la collection "Objets" de la base de données
+	 * @apiDescription Retourne tous les objets de la collection "Objets" de la base de données.
 	 *
 	 * @apiExample Exemple :
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets
 	 *
-	 * @apiSuccess {String}   response      Json contenant les objets.
+	 * @apiSuccess {String}   response  Json contenant les objets.
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *		{
+	 *		  "_id": {
+	 *		    "$oid": "57169ee995e5008a634be22c"
+	 *		  },
+	 *		  "annee": 1926,
+	 *		  "nom": "Caméra HERNEMAN",
+	 *		  "description": "Caméra allemande pour prise de vue de film 35 mm. Manivelle avec poignée en bois. Poignée plate en cuir fixée à deux rivets sur le dessus. Niveau sphérique à bulle vissée sur le dessus. Sur le côté droit, un compteur (de 1 a 60) avec étiquette collée ciné spot. Près de la manivelle, une plaque en métal.",
+	 *		  "imgs": [
+	 *		    {
+	 *		      "src": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
+	 *		    }
+	 *		  ]
+	 *		}
+	 *
+	 * @apiError UserNotFound L'objet n'a pas été trouvé dans la base de données.
+	 *
+	 * @apiErrorExample Error-Response:
+	 *     HTTP/1.1 404 Not Found
+	 *     {
+	 *       "error": "Objet introuvable"
+	 *     }
 	 */
 	@GET
 	@Produces("application/json")
 	public Response GetObjets(){
 
+		LOGGER.info("GET de tous les objets");
+		
 		// Initialisation
 		Gson gson = new Gson();
 		List<Objets> listObjets = new ArrayList<Objets>();
@@ -108,19 +134,6 @@ public class ObjetsEndpoints {
 	 * 
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 *		{
-	 *		  "_id": {
-	 *		    "$oid": "57169ee995e5008a634be22c"
-	 *		  },
-	 *		  "annee": 1926,
-	 *		  "nom": "Caméra HERNEMAN",
-	 *		  "description": "Caméra allemande pour prise de vue de film 35 mm. Manivelle avec poignée en bois. Poignée plate en cuir fixée à deux rivets sur le dessus. Niveau sphérique à bulle vissée sur le dessus. Sur le côté droit, un compteur (de 1 a 60) avec étiquette collée ciné spot. Près de la manivelle, une plaque en métal.",
-	 *		  "imgs": [
-	 *		    {
-	 *		      "src": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
-	 *		    }
-	 *		  ]
-	 *		}
 	 *
 	 * @apiError UserNotFound L'objet n'a pas été trouvé dans la base de données.
 	 *
@@ -135,6 +148,8 @@ public class ObjetsEndpoints {
 	@Produces("application/json")
 	public Response GetObjectbyId(@PathParam("idobjet") final String idobjet){
 		
+		LOGGER.info("GET de l'objet : "+idobjet);
+		
 		// Initialisation
 		Gson gson = new Gson();
 		String objets_response;
@@ -148,6 +163,7 @@ public class ObjetsEndpoints {
 		exist = mongo.TestExistenceDocument(idobjet);
 		
 		if(!exist) {
+			LOGGER.severe("Objet : "+idobjet+" introuvable");
 			RequestError error = new RequestError("Objet introuvable");
 			return Response.status(404).entity(gson.toJson(error)).build();
 		}
@@ -210,6 +226,8 @@ public class ObjetsEndpoints {
 	public Response GetRechercheObjet(@QueryParam("nom") String nom,
 			@QueryParam("amin") int amin,
 			@QueryParam("amax") int amax){
+
+		LOGGER.info("Recherche d'objet");
 
 		// Initialisation
 		Gson gson = new Gson();
@@ -333,13 +351,12 @@ public class ObjetsEndpoints {
 	 * @apiExample Exemple :
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/test/57169ee995e5008a634be22c
 	 *
-	 * @apiSuccess {String}   response      Json contenant deux champs : amin et amax
+	 * @apiSuccess {String}   response      Json contenant un champ : existence
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 * 		{
-   	 *			"exist": "true",
-	 * 		}
-	 *
+	 *	{
+   	 *		"existence": "false",
+	 *	}
 	 */
 	@GET
 	@Path("/test/{idobjet}")
@@ -355,38 +372,44 @@ public class ObjetsEndpoints {
 		//Vérifie l'existence de l'objet en fonction de l'id en paramètre
 		exist = mongo.TestExistenceDocument(idobjet);
 		
-		if(exist)
-			return Response.status(200).entity("true").build();
-		else
-			return Response.status(404).entity("false").build();
+		Existence existence = new Existence();
+		
+		if(exist) {
+			existence.setExistence("true");
+			return Response.status(200).entity(existence).build();
+		}
+		else {
+			existence.setExistence("false");
+			return Response.status(404).entity(existence).build();
+		}
 				
 	}
 	
 	/**
-	 * @api {get} /objets/likes/:idobjet/:uuid Test l'existence d'un objet
+	 * @api {get} /objets/likes/:idobjet/:uuid Information des likes
 	 * @apiVersion 1.0.0
-	 * @apiName TestObjet
+	 * @apiName GetLikes
 	 * @apiGroup Objets
 	 *
-	 * @apiDescription Retourne un boolean déterminant l'existence ou non d'un objet en fonction de son ID.
+	 * @apiDescription  Retourne un document JSON contenant les informations suivantes : si l'utilisateur à aimé l'objet et le nombre de like sur l'objet.
 	 *
 	 * @apiExample Exemple :
-	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/test/57169ee995e5008a634be22c
+	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/57169ee995e5008a634be22c
 	 *
-	 * @apiSuccess {String}   response      Json contenant deux champs : amin et amax
+	 * @apiSuccess {String}   response      Json contenant deux champs : "like" et "nb"
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 *		{
-	 *  		"like": "true",
-	 *  		"nb": 3
-	 *		}
+	 *{
+	 *	"like": "true",
+	 *	"nb": 3
+	 *}
 	 *
 	 */
 	@GET
 	@Path("/likes/{idobjet}/{uuid}")
 	@Produces("application/json")
 	public Response GetLikes(@PathParam("uuid") final String uuid, @PathParam("idobjet") final String idobjet){
-
+		
 		// Initialisation
 		String resp;
 		boolean exist;
@@ -430,21 +453,21 @@ public class ObjetsEndpoints {
 	/**
 	 * @api {post} /objets/likes/add Ajout d'un like sur un objet
 	 * @apiVersion 1.0.0
-	 * @apiName TestObjet
+	 * @apiName likeObjet
 	 * @apiGroup Objets
 	 *
-	 * @apiDescription Retourne un boolean déterminant l'existence ou non d'un objet en fonction de son ID.
+	 * @apiDescription Ajoute un like à l'objet en étant identifié par l'uuid du périphérique.
 	 *
 	 * @apiExample Exemple :
-	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/test/57169ee995e5008a634be22c
+	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/likes/action
 	 *
-	 * @apiSuccess {String}   response      Json contenant deux champs : amin et amax
+	 * @apiSuccess {String}   response      String true ou false
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 *
+	 *     		"Ajout"
 	 */
 	@POST  
-	@Path("/likes/add")
+	@Path("/likes/action")
 	@Consumes("application/json")
 	public Response likeObjet(String jsonInput) throws Exception {
 
@@ -465,7 +488,7 @@ public class ObjetsEndpoints {
 		//Vérifie l'existence de l'objet en fonction de l'id en paramètre
 		exist = mongo.TestExistenceLike(likespost.getObjet());
 		
-		if(exist) {
+		if(exist) { // Si l'objet a déjà été liké
 			Document myDoc = mongo.Selection("objet",likespost.getObjet());
 			likesdoc = gson.fromJson(myDoc.toJson(), LikesDoc.class);
 			
@@ -476,6 +499,9 @@ public class ObjetsEndpoints {
 					likesdoc.getUuid().remove(i);
 					resp = gson.toJson(likesdoc);
 					mongo.Update(likespost.getObjet(), Document.parse(resp));
+					
+					LOGGER.info("Suppression d'un like de l'objet : "+likesdoc.getObjet());
+
 					return Response.status(200).entity("Suppression").build();
 				}
 			}
@@ -485,9 +511,11 @@ public class ObjetsEndpoints {
 			resp = gson.toJson(likesdoc);
 			
 			mongo.Update(likespost.getObjet(), Document.parse(resp));
+			LOGGER.info("Ajout d'un like sur l'objet : "+likesdoc.getObjet());
+
 			return Response.status(200).entity("Ajout").build();
 		}
-		else {
+		else { // Si l'objet n'a jamais été liké on l'ajoute à la BDD
 			LikesDoc likesdoc2 = new LikesDoc();
 			
 			likesdoc2.setObjet(likespost.getObjet());
@@ -496,7 +524,8 @@ public class ObjetsEndpoints {
 			
 			resp = gson.toJson(likesdoc2);
 			
-			mongo.Insert(Document.parse(resp));;
+			mongo.Insert(Document.parse(resp));
+			LOGGER.info("Ajout d'un like sur l'objet : "+likesdoc2.getObjet());
 			return Response.status(200).entity("Ajout").build();
 		}
 		

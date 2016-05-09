@@ -1,0 +1,48 @@
+May 09, 2016 6:27:46 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:27:59 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : T?l?phones
+May 09, 2016 6:28:51 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:29:19 PM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetRechercheObjet
+INFO: Recherche d'objet
+May 09, 2016 6:29:21 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:29:27 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:29:30 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : Radios
+May 09, 2016 6:31:00 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:31:12 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:31:38 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:32:17 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:32:30 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:32:35 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:33:09 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:33:23 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:33:52 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:34:00 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : T?l?phones
+May 09, 2016 6:35:15 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:35:50 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:36:14 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:36:41 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:37:13 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:37:24 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
+May 09, 2016 6:38:16 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+INFO: GET de toutes les vitrines
