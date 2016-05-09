@@ -1,4 +1,4 @@
-// ======= Controlleurs ======= \\
+// ======================== Contrôleurs ============================= \\
 
 angular.module('starter.controllers', [])
 
@@ -114,117 +114,35 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
     
 });
 
-/* ======================== QR Code et Fetch des objets======================== */
+/* ====================== QR Code et recherche ====================== */
 // tab-search.html
 
-// Fonction permettant le lancement d'une fonction après un certain
-// délai, suite à plusieurs appels
-// http://stackoverflow.com/questions/1909441/jquery-keyup-delay
-var delay = (function(){
-    var timer = 0;
-    return function(callback, ms){
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-    };
-})();
-
-//http://codepen.io/shaoner/pen/ZWoYgE?editors=1010
-//Fonction utilisée par le curseur
-function MultiRangeDirective($compile) {
-  
-  var directive = {
-    restrict: 'E',
-    scope: {
-
-      ngModelMin: '=',
-      ngModelMax: '=',
-      ngMin: '=',
-      ngMax: '=',
-      ngStep: '='
-    },
-    link: link
-  };
-
-  return directive;
-
-  ////////////////////
-
-  function link($scope, $element, $attrs) {
-    var min, max, step, $inputMin = angular.element('<input type="range">'),
-      $inputMax;
+app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJSON, $window, Delay){
     
-    if (typeof $scope.ngMin != 'undefined') {
-      min = $scope.ngMin;
-      $inputMin.attr('min', min);
-    } else {
-      min = 0;
-    }
-    if (typeof $scope.ngMax != 'undefined') {
-      max = $scope.ngMax;
-      $inputMin.attr('max', max);
-    } else {
-      max = 2016;
-    }
-    if (typeof $scope.ngStep != 'undefined') {
-      $inputMin.attr('step', $scope.ngStep);
-    }else{
-      step=1;
-    }
-    $inputMax = $inputMin.clone();
-    $inputMin.attr('ng-model', 'ngModelMin');
-    $inputMax.attr('ng-model', 'ngModelMax');
-    $compile($inputMin)($scope);
-    $compile($inputMax)($scope);
-    $element.append($inputMin).append($inputMax);
-    $scope.ngModelMin = $scope.ngModelMin || min;
-    $scope.ngModelMax = $scope.ngModelMax || max;
-
-    $scope.$watch('ngModelMin', function(newVal, oldVal) {
-      if (newVal > $scope.ngModelMax) {
-        $scope.ngModelMin = oldVal;
-      }
-    });
-
-    $scope.$watch('ngModelMax', function(newVal, oldVal) {
-      if (newVal < $scope.ngModelMin) {
-        $scope.ngModelMax = oldVal;
-
-      }
-    });
-  }
-}
-
-
-
-app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJSON, $window){
-   //Permet d'obtenir intervalle la date min et max des objets dynamiquement 
-
-   var annees=useYear;
-   console.log(annees);
-   $scope.yearmin =annees.amin;
-   $scope.yearmax =annees.amax;
-   $scope.from =annees.amin;
-   $scope.to =annees.amax;
-
+    //Permet d'obtenir intervalle la date min et max des objets dynamiquement 
+    var annees=useYear;
+    //~ console.log(annees);
+    $scope.yearmin =annees.amin;
+    $scope.yearmax =annees.amax;
+    $scope.from =annees.amin;
+    $scope.to =annees.amax;
+    $scope.nom = "";
+    $scope.type = '';
 
     $scope.spinner = true; // Cache le loader
 
-     // afficher rechercher par nom 
-    $scope.IsVisibleName = false;
-
-    $scope.showHideName = function () {
-      $scope.IsVisibleName = $scope.IsVisibleName ? false : true;
-      $scope.IsVisibleYear=false;
-    }
-
-    $scope.validSearch=function(param,param2,param3){
+    $scope.validSearch=function(param,param2,param3, type){
+        
+        // type : 'date' <= lancé en déplaçant les curseurs
+        //        'word' <= lancé en écrivant des caractères
         
         // Délai permettant de ne pas faire de requête à chaque keyUp
-        delay(function(){
+        Delay(function(){
             
-            // Lancement de la recherche si + de 2 caractères
-            if (param.length > 2) {
-            
+            // Lancement de la recherche si + de 2 caractères, ou lancé
+            // depuis le range de la date
+            if ((type == "date" || param.length > 2) && $scope.type != '') {
+                
                 $scope.spinner = false; // Affichage du 'loading'
                 
                 GetJSON.getdata("objets/recherche?nom="+param+"&amin="+param2+"&amax="+param3).then(function(d) {
@@ -234,21 +152,11 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
                     $yearmaxsearch=param3;
                 });
             }
+            
+            // Au départ, $scope.type est = '' ; ça permet d'ignorer le
+            // premier lancement initié par l'attribution de from & to
+            $scope.type = type;
         }, 400 );
-    }
-
-
-    //afficher rechercher par année 
-    $scope.IsVisibleYear = false;
-    $scope.showHideYear = function () {
-      $scope.IsVisibleYear = $scope.IsVisibleYear ? false : true;
-      $scope.IsVisibleName=false;
-    }
-    //chercher par année 
-    $scope.searchByYear=function(min,max){
-      GetJSON.getdata("objets/recherche?nom=&amin="+min+"&amax="+max).then(function(d) {
-        $scope.search= d;
-      });
     }
 
     //Qr code
@@ -295,5 +203,3 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
     }
 
 });
-
-app.directive('uiMultiRange', MultiRangeDirective);

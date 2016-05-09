@@ -4,31 +4,37 @@
       Scanner un QR-Code
     </button>
      <!-- Recherche par nom -->
-    <button class="button button-block button-outline button-balanced icon-left ion-search button-home" ng-click="showHideName()">Rechercher par nom
-    </button>
-    <div class="check-element animate-show" ng-show="IsVisibleName">
+    <div class="check-element animate-show">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="q.nom" ng-change="validSearch(q.nom,yearmin,yearmax)">
+        <input id="barsearch" type="search" placeholder="Rechercher..." ng-model="nom" ng-change="validSearch(nom,from,to,'word')">
         <!-- Loader : -->
         <ion-spinner icon="ripple" class="spinner-positive" ng-hide="spinner"></ion-spinner>
       </label>
     </div>
-    <!--<button class="button button-block button-outline button-positive icon-left ion-funnel button-home" ng-click="showHide()">Filtrer par année</button> -->
+    
     <!-- Recherche par date -->
-    <button class="button button-block button-outline button-royal icon-left ion-calendar button-home" ng-click="showHideYear()">Rechercher par dates</button>
-    <div class="check-element animate-show" ng-show="IsVisibleYear">
+    <div class="check-element animate-show">
         <div class="list">
           <div class="item item-divider">Année:</div>
           <div class="item range range-positive">
           <div class="range-label">{{from}}</div>
-          <ui-multi-range ng-step="1" ng-min="yearmin" ng-max="yearmax" ng-model-min="from" ng-model-max="to"></ui-multi-range>
+          <ui-multi-range ng-step="1" ng-min="yearmin" ng-max="yearmax" ng-model-min="from" ng-model-max="to"  ng-change-min="validSearch(nom,from,to,'date')" ng-change-max="validSearch(nom,from,to,'date')"></ui-multi-range>
           <div class="range-label">{{to}}</div>
         </div>
       </div>
-      <button class="button button-block button-outline button-royal" ng-click="searchByYear(from,to)">Lancer la recherche</button>
     </div> 
     <!-- <p>Année sélectionnée : {{from}}-{{to}}</p> -->
+    <div ng-if="results.length==0">
+<!--
+      <div class="item item-text-wrap animate-show" ng-show="type=='date'">
+        Entrez 3 caractères au minimum...
+      </div>
+-->
+      <div class="item item-text-wrap animate-show"  ng-if="nom.length>2" ng-hide="nom.length<=2">
+        Pas de résultat trouvé...
+      </div>
+    </div
     <!-- Résultat de la recherche -->
     <ion-list>
       <a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/search/{{elm.id}}">
@@ -39,13 +45,5 @@
         <p>{{elm.annee || 'Date inconnue'}}</p>
       </a>
    	</ion-list>
-    <div ng-if="results.length==0">
-      <div class="item item-text-wrap animate-show"  ng-if="q.nom.length<=2 && IsVisibleName==true" ng-show="q.nom.length<=2 &&IsVisibleName==true">
-        Entrer 3 caractères au minimum...
-      </div>
-      <div class="item item-text-wrap animate-show"  ng-if="(q.nom.length>2 && IsVisibleName==true ) || IsVisibleYear==true" ng-hide="q.nom.length<=2">
-        Pas de résultat trouvé...
-      </div>
-  </div
   </ion-content>
 </ion-view>

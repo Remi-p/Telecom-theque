@@ -2,7 +2,7 @@
 <widget id="com.ionicframework.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Télécom thèque</name>
   <description>Visite virtuelle de la Télécom'thèque</description>
-  <author email="you@example.com" href="http://example.com.com/">Thibaut Gourdel / Paul Mendez / Rémi Perrot</author>
+  <author email="sec_telecom@enseirb-matmeca.fr" href="http://example.com.com/">Thibaut Gourdel / Paul Mendez / Rémi Perrot</author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
@@ -64,9 +64,28 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+  <platform name="windows">
+    <icon height="99" src="resources/windows/icon/NewStoreLogo.scale-200.png" width="99"/>
+    <icon height="150" src="resources/windows/icon/Square150x150Logo.scale-100.png" width="150"/>
+    <icon height="30" src="resources/windows/icon/Square44x44Logo.targetsize-32.png" width="30"/>
+    <icon height="50" src="resources/windows/icon/NewStoreLogo.scale-100.png" width="50"/>
+    <icon height="106" src="resources/windows/icon/NewStoreLogo.scale-200.png" width="106"/>
+    <icon src="resources/windows/icon/Wide310x150Logo.scale-100.png" width="310" height="150" />
+    <icon src="resources/windows/icon/Square71x71Logo.scale-400.png" width="170" height="170" />
+    <icon src="resources/windows/icon/Wide310x150Logo.scale-200.png" width="620" height="300" />
+    <icon src="resources/windows/icon/Square150x150Logo.scale-200.png" width="300" height="300" />
+    <icon src="resources/windows/icon/Square71x71Logo.scale-100.png" width="71" height="71" />
+    <icon src="resources/windows/icon/Square44x44Logo.scale-100.png" width="44" height="44" />
+    <icon src="resources/windows/icon/NewStoreLogo.scale-200.png" width="120" height="120" />
+    <icon src="resources/windows/icon/Square70x70Logo.scale-100.png" width="70" height="70" />
+    <icon src="resources/windows/icon/Square310x310Logo.scale-100.png" width="310" height="310" />
+    <splash height="1240" src="resources/screen/windows/SplashScreen.scale-200.png" width="600"/>
+    <splash height="300" src="resources/screen/windows/SplashScreen.scale-100.png" width="620"/>
+    <splash height="2480" src="resources/screen/windows/SplashScreen.scale-400.png" width="1200"/>
+  </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
-  <plugin name="cordova-plugin-barcodescanner" version="0.7.0"/>
-  <plugin name="cordova-plugin-whitelist" version="0.7.0"/>
-  <plugin name="cordova-plugin-device" version="0.7.0"/>
-  <plugin name="cordova-plugin-network-information" version="0.7.0"/>
+  <plugin name="cordova-plugin-barcodescanner" version="0.7.0" />
+  <plugin name="cordova-plugin-whitelist" version="1.2.2" />
+  <plugin name="cordova-plugin-device" version="1.1.2" />
+  <plugin name="cordova-plugin-network-information" version="1.2.1" />
 </widget>

@@ -1,5 +1,11 @@
 /* Style personnel en + de ceux proposés par Ionic */
 
+/* Ajout ici du style sur ng-hide, comme ça on peut configurer un
+ * objet caché par défaut dès le lancement de la page, sans Angular */
+.ng-hide {
+    display:none;
+}
+
 .vitrines {
     margin-bottom:5px;
     margin-top:5px;

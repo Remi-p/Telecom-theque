@@ -1,4 +1,4 @@
-/* ========== Services de l'application ======== */
+/* ==================== Services de l'application =================== */
 
 angular.module('starter.services', [])
 
@@ -93,4 +93,15 @@ angular.module('starter.services', [])
         }
     };
     
+})
+
+// Service permettant le lancement d'une fonction après un certain
+// délai, suite à plusieurs appels
+// http://stackoverflow.com/questions/1909441/jquery-keyup-delay
+.factory('Delay', function() {
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
 });

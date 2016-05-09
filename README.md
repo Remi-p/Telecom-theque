@@ -9,7 +9,7 @@ Application de parcours virtuel du Télécom'thèque
 
 ## Partie client
 
-[code/client/Telecom-theque/](code/client/Telecom-theque/)
+[code/client/](code/client/)
 
 # Fonctionnalités attendues
 
