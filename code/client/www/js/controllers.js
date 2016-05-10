@@ -88,7 +88,8 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         
         $scope.nb_like = d.nb;
         
-        $scope.star = (d.note === 'true');
+        $scope.note = d.note;
+        $scope.star = (d.vote === 'true');
         $scope.nb_vote = d.nbv;
         $scope.moy_vote = d.moy;
     });
@@ -123,18 +124,20 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         
         Social.setstars($stateParams.id, note).then(function(d) {
             
-            console.log(d);
-            
             // Update de la moyenne
             $scope.moy_vote = d.moy;
+            
+            console.log(d);
             
             if (d.msg == "Ajout") {
                 $scope.star = true;
                 $scope.nb_vote = $scope.nb_vote + 1;
+                $scope.note = note;
             }
             else if (d.msg == "Suppression") {
                 $scope.star = false;
                 $scope.nb_vote = $scope.nb_vote - 1;
+                $scope.note = 0;
             }
             // else (default) : on ne touche à rien
             
@@ -216,7 +219,7 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
             
             // Test si l'objet existe
             GetJSON.getdata("objets/test/" + barcodeData.text).then(function(d) {
-                if ((d.existence) && d.existence == "true") {
+                if ((typeof d.existence !== 'undefined') && d.existence == "true") {
                     $window.location.href = '#/tab/search/' + barcodeData.text;
                 }
                 else {
@@ -226,8 +229,14 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
                         alert('Objet non trouvé');
                     }
                 }
+            }, function(e) { // Erreur d'existence                
+                if (release == "windows") {
+                    (new Windows.UI.Popups.MessageDialog("Objet non trouvé", "Erreur")).showAsync().done();
+                } else {
+                    alert('Objet non trouvé');
+                }
             });
-        }, function(error) {
+        }, function(error) { // Erreur avec .scan()
             if (release == "windows") {
                 (new Windows.UI.Popups.MessageDialog(error, "Erreur")).showAsync().done();
             } else {

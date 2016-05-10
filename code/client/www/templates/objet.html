@@ -27,7 +27,7 @@
         <div style="text-align:right;">
             <!-- Notes -->
             <div id="notation" class="bouton-etoiles" ng-switch="nb_vote">
-                <a ng-repeat="n in [1, 2, 3, 4, 5]" class="icon {{star ? '' : 'dark'}} ion-ios-star{{moy_vote >= n ? '' : '-outline'}}" stop-event ng-click="setStars({{n}})"></a> <br/>
+                <a ng-repeat="n in [1, 2, 3, 4, 5]" class="icon {{star ? '' : 'dark'}} ion-ios-star{{note >= n ? '' : '-outline'}}" stop-event ng-click="setStars({{n}})"></a> <br/>
                 <ion-spinner icon="ripple" class="spinner-dark" ng-show="spinnerstar"></ion-spinner>
                 <p ng-switch-when="0" ng-hide="spinnerstar">Aucune note.</p>
                 <p ng-switch-when="1" ng-hide="spinnerstar">{{moy_vote}}/5 ({{nb_vote}} vote).</p>

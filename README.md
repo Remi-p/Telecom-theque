@@ -13,6 +13,12 @@ Thibaut G. / Paul M. / Rémi P. // ENSEIRB-MATMECA 2016, T2
 
 [code/client/](code/client/)
 
+## Partie serveur
+
+[doc/serveur/](doc/serveur/)
+
+Lien vers la documentation en ligne : [API Télécom'thèque](http://tgourdel.rtrinity.enseirb-matmeca.fr/).
+
 # Fonctionnalités attendues
 
 L'application permettra de consulter les fiches descriptives des objets du musée (Télécom'thèque).
@@ -52,5 +58,7 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
     * Après avoir déplacé les curseurs pour la période
 * Possibilité de "liker" un objet
 * Possibilité de noter un objet
-* Indique lorsqu'aucune connexion n'est disponible
+* Indique à l'utilisateur les erreurs liées
+    * À une absence de connexion
+    * À un mauvais QR Code
 * Modification du CSS en fonction de l'orientation (paysage, portrait)
