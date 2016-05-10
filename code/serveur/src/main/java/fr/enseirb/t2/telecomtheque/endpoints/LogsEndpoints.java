@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 public class LogsEndpoints {
 	
 	/**
-	 * @api {get} /logs Logs au format HTML.
+	 * @api {get} /logs Logs au format HTML
 	 * @apiVersion 1.0.0
 	 * @apiName htmlLogs
 	 * @apiGroup Logs
@@ -39,9 +39,9 @@ public class LogsEndpoints {
 	}
 	
 	/**
-	 * @api {get} /logs/txt Logs au format TEXT.
+	 * @api {get} /logs/txt Logs au format TEXT
 	 * @apiVersion 1.0.0
-	 * @apiName htmlLogs
+	 * @apiName textLogs
 	 * @apiGroup Logs
 	 *
 	 * @apiDescription Retourne les logs au format TXT.

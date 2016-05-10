@@ -2,7 +2,9 @@ package fr.enseirb.t2.telecomtheque.endpoints;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,15 +25,19 @@ import com.mongodb.client.MongoCursor;
 
 import fr.enseirb.t2.telecomtheque.config.Config;
 import fr.enseirb.t2.telecomtheque.models.Existence;
-import fr.enseirb.t2.telecomtheque.models.Likes;
 import fr.enseirb.t2.telecomtheque.models.LikesDoc;
+import fr.enseirb.t2.telecomtheque.models.LikesNotes;
 import fr.enseirb.t2.telecomtheque.models.LikesPost;
 import fr.enseirb.t2.telecomtheque.models.MinMaxAnnees;
+import fr.enseirb.t2.telecomtheque.models.NotesDoc;
+import fr.enseirb.t2.telecomtheque.models.NotesPost;
+import fr.enseirb.t2.telecomtheque.models.NotesPostReturn;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturn;
 import fr.enseirb.t2.telecomtheque.models.ObjetReturnBis;
 import fr.enseirb.t2.telecomtheque.models.Objets;
 import fr.enseirb.t2.telecomtheque.models.ObjetsBis;
 import fr.enseirb.t2.telecomtheque.models.RequestError;
+import fr.enseirb.t2.telecomtheque.models.Votes;
 import fr.enseirb.t2.telecomtheque.requests.MongoDB;
 
 /**
@@ -58,26 +64,26 @@ public class ObjetsEndpoints {
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
 	 *		{
-	 *		  "_id": {
-	 *		    "$oid": "57169ee995e5008a634be22c"
-	 *		  },
-	 *		  "annee": 1926,
-	 *		  "nom": "Caméra HERNEMAN",
-	 *		  "description": "Caméra allemande pour prise de vue de film 35 mm. Manivelle avec poignée en bois. Poignée plate en cuir fixée à deux rivets sur le dessus. Niveau sphérique à bulle vissée sur le dessus. Sur le côté droit, un compteur (de 1 a 60) avec étiquette collée ciné spot. Près de la manivelle, une plaque en métal.",
-	 *		  "imgs": [
-	 *		    {
-	 *		      "src": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
-	 *		    }
-	 *		  ]
-	 *		}
+	 *			"_id": {
+	 *			"$oid": "57169ee995e5008a634be22c"
+	 *		},
+	 *		"annee": 1926,
+	 *		"nom": "Caméra HERNEMAN",
+	 *		"description": "Caméra allemande pour prise de vue de film 35 mm. Manivelle avec poignée en bois. Poignée plate en cuir fixée à deux rivets sur le dessus. Niveau sphérique à bulle vissée sur le dessus. Sur le côté droit, un compteur (de 1 a 60) avec étiquette collée ciné spot. Près de la manivelle, une plaque en métal.",
+	 *		"imgs": [
+	 *			{
+	 *			"src": "http://www.culture.gouv.fr/Wave/image/joconde/0675/m081633_2-apv-3-2_p.jpg"
+	 *			}
+	 *	]
+	 *}
 	 *
 	 * @apiError UserNotFound L'objet n'a pas été trouvé dans la base de données.
 	 *
 	 * @apiErrorExample Error-Response:
 	 *     HTTP/1.1 404 Not Found
-	 *     {
-	 *       "error": "Objet introuvable"
-	 *     }
+	 *{
+	 *	"error": "Objet introuvable"
+	 *}
 	 */
 	@GET
 	@Produces("application/json")
@@ -135,13 +141,13 @@ public class ObjetsEndpoints {
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
 	 *
-	 * @apiError UserNotFound L'objet n'a pas été trouvé dans la base de données.
+	 * @apiError Not Found L'objet n'a pas été trouvé dans la base de données.
 	 *
 	 * @apiErrorExample Error-Response:
 	 *     HTTP/1.1 404 Not Found
-	 *     {
-	 *       "error": "Objet introuvable"
-	 *     }
+	 *{
+	 *	"error": "Objet introuvable"
+	 *}
 	 */
 	@GET  
 	@Path("/{idobjet}")
@@ -212,12 +218,12 @@ public class ObjetsEndpoints {
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
 	 *[
-	 *  {
-	 *    "id": "57169f1395e5008a634be22e",
-	 *    "nom": "Projecteur radiocinéma 35mm 82301 PHILIPS",
-	 *    "annee": "20ème siècle",
-	 *    "cover": "http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017600_p.jpg"
-	 *  }
+	 *	{
+	 * 		"id": "57169f1395e5008a634be22e",
+	 * 		"nom": "Projecteur radiocinéma 35mm 82301 PHILIPS",
+	 *		"annee": "20ème siècle",
+	 *		"cover": "http://www.culture.gouv.fr/Wave/image/joconde/0884/m103989_017600_p.jpg"
+	 *	}
 	 *]
 	 */
 	@GET
@@ -293,18 +299,18 @@ public class ObjetsEndpoints {
 	 * 
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 * 		{
-   	 *			"amin": 1900,
-  	 * 			"amax": 1990
-	 * 		}
+	 * {
+   	 *	"amin": 1900,
+  	 * 	"amax": 1990
+	 * }
 	 *
-	 * @apiError UserNotFound Aucun objet dans la base de données.
+	 * @apiError Error Aucun objet dans la base de données.
 	 *
 	 * @apiErrorExample Error-Response:
 	 *     HTTP/1.1 404 Not Found
-	 *     {
-	 *       "error": "Aucun objet disponible"
-	 *     }
+	 *{
+	 *	"error": "Aucun objet disponible"
+	 * }
 	 */
 	@GET
 	@Path("/dates")
@@ -351,20 +357,21 @@ public class ObjetsEndpoints {
 	 * @apiExample Exemple :
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/test/57169ee995e5008a634be22c
 	 *
-	 * @apiSuccess {String}   response      Json contenant un champ : existence
+	 * @apiSuccess {String}   response      Json contenant un champ existence marqué à true ou false
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 *	{
-   	 *		"existence": "false",
-	 *	}
+	 *{
+   	 *	"existence": "false",
+	 *}
 	 */
 	@GET
 	@Path("/test/{idobjet}")
-	@Produces("text/plain")
+	@Produces("application/json")
 	public Response TestObjet(@PathParam("idobjet") final String idobjet){
 
 		// Initialisation
 		boolean exist;
+		Gson gson = new Gson();
 
 		// Connexion à la base de donnée
 		MongoDB mongo = new MongoDB(Config.DB, Config.OBJETS); // db et collection
@@ -376,95 +383,131 @@ public class ObjetsEndpoints {
 		
 		if(exist) {
 			existence.setExistence("true");
-			return Response.status(200).entity(existence).build();
+			return Response.status(200).entity(gson.toJson(existence)).build();
 		}
 		else {
 			existence.setExistence("false");
-			return Response.status(404).entity(existence).build();
+			return Response.status(404).entity(gson.toJson(existence)).build();
 		}
 				
 	}
 	
 	/**
-	 * @api {get} /objets/likes/:idobjet/:uuid Information des likes
+	 * @api {get} /objets/meta/:idobjet/:uuid Information des likes et des votes
 	 * @apiVersion 1.0.0
 	 * @apiName GetLikes
 	 * @apiGroup Objets
 	 *
-	 * @apiDescription  Retourne un document JSON contenant les informations suivantes : si l'utilisateur à aimé l'objet et le nombre de like sur l'objet.
+	 * @apiDescription  Retourne un document JSON contenant les informations suivantes :
+	 * 					si l'utilisateur a aimé ou voté pour l'objet,
+	 * 					le nombre de vote, la moyenne et le nombre de like.
 	 *
 	 * @apiExample Exemple :
-	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/57169ee995e5008a634be22c
+	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/meta/57169ee995e5008a634be22c/uuid
 	 *
-	 * @apiSuccess {String}   response      Json contenant deux champs : "like" et "nb"
+	 * @apiSuccess {String}   response      Json contenant les champs relatifs aux votes ainsi qu'aux likes.
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
 	 *{
-	 *	"like": "true",
-	 *	"nb": 3
+	 *  "like": "false",
+	 *  "vote": "false",
+	 *  "nb": 4,
+	 *  "moy": 2.9,
+	 *  "nbv": 8,
+	 *  "note": 0
 	 *}
 	 *
 	 */
 	@GET
-	@Path("/likes/{idobjet}/{uuid}")
+	@Path("/meta/{idobjet}/{uuid}")
 	@Produces("application/json")
 	public Response GetLikes(@PathParam("uuid") final String uuid, @PathParam("idobjet") final String idobjet){
 		
 		// Initialisation
 		String resp;
-		boolean exist;
+		boolean exist_likes;
+		boolean exist_notes;
 		Gson gson = new Gson();
-		Likes likes = new Likes();
+		LikesNotes likesnotes = new LikesNotes();
 		LikesDoc likesdoc = new LikesDoc();
-
+		NotesDoc notesdoc = new NotesDoc();
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(1); //trois chiffre apres la virgule
+		
 		// Connexion à la base de donnée
-		MongoDB mongo = new MongoDB(Config.DB, Config.LIKES); // db et collection
+		MongoDB mongo_likes = new MongoDB(Config.DB, Config.LIKES); // db et collection
+		MongoDB mongo_notes = new MongoDB(Config.DB, Config.NOTES); // db et collection
 
 		//Vérifie l'existence de l'objet en fonction de l'id en paramètre
-		exist = mongo.TestExistenceLike(idobjet);
+		exist_likes = mongo_likes.TestExistenceLike(idobjet);
+		exist_notes = mongo_notes.TestExistenceNote(idobjet);
 		
-		if(exist) {
-			Document myDoc = mongo.Selection("objet",idobjet);
+		// Si l'objet à déjà été liké
+		if(exist_likes) {
+			Document myDoc = mongo_likes.Selection("objet",idobjet);
 			likesdoc = gson.fromJson(myDoc.toJson(), LikesDoc.class);
-			
-			likes.setLike("false");
-			
+			likesnotes.setLike("false");
 			for(String b_uuid: likesdoc.getUuid()) {
 				if(b_uuid.equals(uuid)) {
-					
-					likes.setLike("true");
+					likesnotes.setLike("true");
 				}
 			}
-			
-			likes.setNb(likesdoc.getUuid().size());
-			
-			resp = gson.toJson(likes);
-		}
+			likesnotes.setNb(likesdoc.getUuid().size());
+		} // Si l'objet n'a jamais été liké
 		else {
-			likes.setLike("false");
-			likes.setNb(0);
-			
-			resp = gson.toJson(likes);
+			likesnotes.setLike("false");
+			likesnotes.setNb(0);
 		}
+		
+		// Si l'objet a déjà été noté
+		if(exist_notes) {
+			Document myDoc = mongo_notes.Selection("objet",idobjet);
+			notesdoc = gson.fromJson(myDoc.toJson(), NotesDoc.class);
+			likesnotes.setVote("false");
+			
+			double moy = 0;
+			
+			for(Votes b_uuid: notesdoc.getNotes()) {
+				moy = moy + b_uuid.getNote();
+				if(b_uuid.getUuid().equals(uuid)) {
+					likesnotes.setVote("true");
+					likesnotes.setNote(b_uuid.getNote());
+				}
+			}
+			int nbvotes = notesdoc.getNotes().size();
+			
+			likesnotes.setNbv(nbvotes);
+			if (nbvotes != 0) 
+				likesnotes.setMoy(Double.parseDouble(df.format(moy/nbvotes)));
+			else
+				likesnotes.setMoy(0);
+
+		}
+		else { // Si l'objet n'a jamais été noté
+			likesnotes.setVote("false");
+			likesnotes.setNbv(0);
+		}
+		
+		resp = gson.toJson(likesnotes);
 		
 		return Response.status(200).entity(resp).build();
 	}
 	
 	/**
-	 * @api {post} /objets/likes/add Ajout d'un like sur un objet
+	 * @api {post} /objets/likes/action Action sur les likes
 	 * @apiVersion 1.0.0
 	 * @apiName likeObjet
 	 * @apiGroup Objets
 	 *
-	 * @apiDescription Ajoute un like à l'objet en étant identifié par l'uuid du périphérique.
+	 * @apiDescription Ajoute ou suprime un like sur un objet par son ID et l'uuid de l'utilisateur.
 	 *
 	 * @apiExample Exemple :
 	 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/likes/action
 	 *
-	 * @apiSuccess {String}   response      String true ou false
+	 * @apiSuccess {String}   response      String "Ajout" ou "Suppresion"
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
-	 *     		"Ajout"
+	 *     "Ajout"
 	 */
 	@POST  
 	@Path("/likes/action")
@@ -474,7 +517,6 @@ public class ObjetsEndpoints {
 		// Initialisation
 		String resp;
 		boolean exist;
-		boolean remove;
 		Gson gson = new Gson();
 		LikesDoc likesdoc = new LikesDoc();
 		LikesPost likespost = new LikesPost();
@@ -500,7 +542,7 @@ public class ObjetsEndpoints {
 					resp = gson.toJson(likesdoc);
 					mongo.Update(likespost.getObjet(), Document.parse(resp));
 					
-					LOGGER.info("Suppression d'un like de l'objet : "+likesdoc.getObjet());
+					LOGGER.info("Suppression d'un like de l'objet d'ID "+likesdoc.getObjet());
 
 					return Response.status(200).entity("Suppression").build();
 				}
@@ -511,7 +553,7 @@ public class ObjetsEndpoints {
 			resp = gson.toJson(likesdoc);
 			
 			mongo.Update(likespost.getObjet(), Document.parse(resp));
-			LOGGER.info("Ajout d'un like sur l'objet : "+likesdoc.getObjet());
+			LOGGER.info("Ajout d'un like sur l'objet d'ID "+likesdoc.getObjet());
 
 			return Response.status(200).entity("Ajout").build();
 		}
@@ -525,11 +567,116 @@ public class ObjetsEndpoints {
 			resp = gson.toJson(likesdoc2);
 			
 			mongo.Insert(Document.parse(resp));
-			LOGGER.info("Ajout d'un like sur l'objet : "+likesdoc2.getObjet());
+			LOGGER.info("Ajout d'un like sur l'objet d'ID "+likesdoc2.getObjet());
 			return Response.status(200).entity("Ajout").build();
 		}
+	}
 		
-		
+		/**
+		 * @api {post} /objets/notes/action Action de vote sur un objet
+		 * @apiVersion 1.0.0
+		 * @apiName addNotes
+		 * @apiGroup Objets
+		 *
+		 * @apiDescription Ajoute ou supprime une note à l'objet en étant identifié par l'uuid du périphérique.
+		 *
+		 * @apiExample Exemple :
+		 * curl -i http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/notes/action
+		 * @apiSuccessExample Success-Response:
+		 *     HTTP/1.1 200 OK
+		 *{
+		 *	"moy": 2.9,
+		 *	"msg": "Suppression"
+		 *}
+		 */
+		@POST  
+		@Path("/notes/action")
+		@Consumes("application/json")
+		@Produces("application/json")
+		public Response addNotes(String jsonInput) throws Exception {
+
+			// Initialisation
+			String resp;
+			boolean exist;
+			boolean change = false;
+			Gson gson = new Gson();
+			NotesDoc notesdoc = new NotesDoc();
+			NotesPost notespost = new NotesPost();
+			DecimalFormat df = new DecimalFormat();
+			df.setMaximumFractionDigits(1); // Affichage de la moyenne des votes
+											// Un chiffre après la virgule
+
+			// Serialization
+			notespost = gson.fromJson(jsonInput, NotesPost.class);
+			
+			// Connexion à la base de donnée
+			MongoDB mongo = new MongoDB(Config.DB, Config.NOTES); // db et collection
+
+			//Vérifie l'existence de l'objet en fonction de l'id en paramètre
+			exist = mongo.TestExistenceNote(notespost.getObjet());
+			
+			if(exist) { // Si l'objet a déjà été noté
+				Document myDoc = mongo.Selection("objet",notespost.getObjet());
+				notesdoc = gson.fromJson(myDoc.toJson(), NotesDoc.class);
+				
+				int i;
+				double moy = 0;
+				
+				for(i=0; i<notesdoc.getNotes().size();i++) {
+					// si l'utilisateur modifie sa note
+					if(notesdoc.getNotes().get(i).getUuid().equals(notespost.getUuid())) {
+						notesdoc.getNotes().remove(i);
+						resp = gson.toJson(notesdoc);
+						mongo.Update(notespost.getObjet(), Document.parse(resp));
+						LOGGER.info("Suppresion d'un vote sur l'objet d'iD "+notesdoc.getObjet());
+						change = true;
+					}
+					else {
+						moy = moy + notesdoc.getNotes().get(i).getNote();
+					}
+				}
+				
+				int oldsize = notesdoc.getNotes().size();
+				
+				if(change) {
+						if(oldsize == 0)
+							moy = 0;
+						else
+							moy = moy/oldsize;
+						moy = Double.parseDouble(df.format(moy));
+
+					return Response.status(200).entity(gson.toJson(new NotesPostReturn(moy,"Suppression"))).build();
+				}
+				
+				notesdoc.getNotes().add(new Votes(notespost.getUuid(), notespost.getNote()));
+				
+				resp = gson.toJson(notesdoc);
+				
+				mongo.Update(notespost.getObjet(), Document.parse(resp));
+				LOGGER.info("Ajout d'un like sur l'objet d'ID "+notesdoc.getObjet());
+				
+				moy = 0;
+				for(i=0; i<notesdoc.getNotes().size();i++) {
+						moy = moy + notesdoc.getNotes().get(i).getNote();
+				}
+				moy = moy/notesdoc.getNotes().size();
+				moy = Double.parseDouble(df.format(moy));
+				
+				return Response.status(200).entity(gson.toJson(new NotesPostReturn(moy,"Ajout"))).build();
+			}
+			else { // Si l'objet n'a jamais été noté on l'ajoute à la BDD
+				NotesDoc notesdoc2 = new NotesDoc();
+				
+				notesdoc2.setObjet(notespost.getObjet());
+				notesdoc2.setNotes(new ArrayList<Votes>());
+				notesdoc2.getNotes().add(new Votes(notespost.getUuid(), notespost.getNote()));
+				
+				resp = gson.toJson(notesdoc2);
+				
+				mongo.Insert(Document.parse(resp));
+				LOGGER.info("Ajout d'un vote sur l'objet d'ID "+notesdoc2.getObjet());
+				return Response.status(200).entity(gson.toJson(new NotesPostReturn(notespost.getNote(),"Ajout"))).build();
+			}
 	}
 
 }

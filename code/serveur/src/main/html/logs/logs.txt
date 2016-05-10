@@ -1,48 +1,84 @@
-May 09, 2016 6:27:46 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+May 10, 2016 1:08:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 1:08:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 1:08:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Suppresion d'une note de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 1:08:44 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 1:08:44 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 1:08:44 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:00 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
 INFO: GET de toutes les vitrines
-May 09, 2016 6:27:59 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+May 10, 2016 4:49:03 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
 INFO: GET de la vitrine : T?l?phones
-May 09, 2016 6:28:51 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+May 10, 2016 4:49:08 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : Vid?o
+May 10, 2016 4:49:13 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:32 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:49:32 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:49:32 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:33 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:49:33 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:49:33 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Suppresion d'une note de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:36 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:49:36 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:49:36 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:37 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:49:37 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:49:37 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Suppresion d'une note de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:49:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:49:39 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:49:41 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints likeObjet
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:52:12 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
 INFO: GET de toutes les vitrines
-May 09, 2016 6:29:19 PM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetRechercheObjet
-INFO: Recherche d'objet
-May 09, 2016 6:29:21 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
+May 10, 2016 4:52:15 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : Vid?o
+May 10, 2016 4:52:17 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:52:21 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 4:52:21 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 4:52:21 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Ajout d'un like sur l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:52:25 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169f0295e5008a634be22d
+May 10, 2016 4:52:30 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169f1395e5008a634be22e
+May 10, 2016 4:52:35 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:52:51 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
 INFO: GET de toutes les vitrines
-May 09, 2016 6:29:27 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:29:30 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
-INFO: GET de la vitrine : Radios
-May 09, 2016 6:31:00 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:31:12 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:31:38 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:32:17 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:32:30 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:32:35 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:33:09 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:33:23 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:33:52 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:34:00 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
-INFO: GET de la vitrine : T?l?phones
-May 09, 2016 6:35:15 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:35:50 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:36:14 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:36:41 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:37:13 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:37:24 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
-May 09, 2016 6:38:16 PM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrines
-INFO: GET de toutes les vitrines
+May 10, 2016 4:52:53 AM fr.enseirb.t2.telecomtheque.endpoints.VitrinesEndpoints GetVitrine
+INFO: GET de la vitrine : Vid?o
+May 10, 2016 4:52:55 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169ee995e5008a634be22c
+May 10, 2016 4:53:02 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints GetObjectbyId
+INFO: GET de l'objet : 57169f5c95e5008a634be232
+May 10, 2016 9:02:17 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: 57169ee995e5008a634be22c
+May 10, 2016 9:02:17 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: true
+May 10, 2016 9:02:17 AM fr.enseirb.t2.telecomtheque.endpoints.ObjetsEndpoints addNotes
+INFO: Suppresion d'une note de l'objet : 57169ee995e5008a634be22c

@@ -18,6 +18,8 @@ public class Config {
 	public static String OBJETS = "objets";
 	public static String VITRINES = "vitrines";
 	public static String LIKES = "likes";
+	public static String NOTES = "notes";
+
 
 	// Private constructor : disallow creating instance
 	private Config() {}

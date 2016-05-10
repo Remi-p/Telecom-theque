@@ -89,6 +89,25 @@ public class MongoDB {
 	}
 	
 	
+	/**
+	 * Selection d'un document dans une collection par son id
+	 */
+	public boolean TestExistenceNote(String idobjet) {
+		
+		if(TestObjectID(idobjet)) {
+			long count =  this.collection.count(eq("objet", idobjet));
+			if(count>0){
+				return true; 
+			}
+			else {
+				return false;
+			}
+		}
+		else
+			return false;
+	}
+	
+	
 	
 	/**
 	 * Selection d'un document dans une collection par son id
