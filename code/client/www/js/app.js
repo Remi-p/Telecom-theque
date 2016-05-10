@@ -1,11 +1,13 @@
-// Ionic Starter App
+// Telecom'thèque
 // Thibaut G. / Paul M. / Rémi P. / ENSEIRB-MATMECA 2016, T2
 
 // Variable permettant de s'adapter aux devices
-//  "serve" = lorsque `ionic serve` est utilisée
+//  "serve" = lorsque `ionic serve` est utilisé
 //  "android" = build pour appareils Android
 //  "windows" = build pour windows phone
 release = "serve";
+// URL du serveur
+url_api = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
 
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova']);
 

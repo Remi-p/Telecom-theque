@@ -6,10 +6,10 @@
         <h1>{{vitrine.nom}}</h1>
         
         <div class="list"> <!-- Liste des objets de la vitrine -->
-            <a ng-repeat="elm in vitrine.objets" class="item item-text-wrap item-thumbnail-left objet-item" id="{{elm.id}}" href="#/tab/objet/{{elm.id}}">
+            <a ng-repeat="elm in vitrine.objets" class="item item-text-wrap item-thumbnail-left objet-item list-item-telecom" id="{{elm.id}}" href="#/tab/objet/{{elm.id}}">
                 <!-- De même que tab-vitrines, découpe l'img -->
                 <div class="center-cropped item-image">
-                  <img src="{{elm.cover}}">
+                    <img src="{{elm.cover}}">
                 </div>
                 
                 <h2>{{elm.nom}}</h2>

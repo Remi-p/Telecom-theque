@@ -3,6 +3,7 @@
     <button class="button button-block button-outline button-positive icon-left ion-qr-scanner button-home" ng-click="lireCode()">
       Scanner un QR-Code
     </button>
+    
      <!-- Recherche par nom -->
     <div class="check-element animate-show">
       <label class="item item-input">
@@ -24,6 +25,7 @@
         </div>
       </div>
     </div> 
+    
     <!-- <p>Année sélectionnée : {{from}}-{{to}}</p> -->
     <div ng-if="results.length==0">
 <!--
@@ -35,6 +37,7 @@
         Pas de résultat trouvé...
       </div>
     </div
+    
     <!-- Résultat de la recherche -->
     <ion-list>
       <a ng-repeat="elm in search as results" class="item item-text-wrap item-thumbnail-left objet-item" href="#/tab/search/{{elm.id}}">

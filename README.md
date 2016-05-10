@@ -1,7 +1,9 @@
-Télécom'Thèque
+Télécom'thèque
 ==============
 
 Application de parcours virtuel du Télécom'thèque
+
+Thibaut G. / Paul M. / Rémi P. // ENSEIRB-MATMECA 2016, T2
 
 -------------------------------------------------
 
@@ -36,7 +38,8 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 
 * Endpoint renvoyant la date minimum & maximum des objets de la BDD (pour la sélection de la période)
 * Endpoint renvoyant true ou false en fonction de l'existence d'un objet
-* Endpoint gérant le nombre d'étoiles/likes d'un objet
+* Endpoint gérant le nombre de likes d'un objet
+* Endpoint gérant les notes sur un objet
 
 ## Fonctionnalités client
 
@@ -44,6 +47,10 @@ L'architecture de l'application sera de la forme client-serveur, créées respec
 * Animations dans l'application
 * Recadrage automatique des images
 * Loader entre les pages
-* Recherche automatiquement lancée après avoir tappé le texte
+* Recherche automatiquement lancée
+    * Après avoir tappé le texte
+    * Après avoir déplacé les curseurs pour la période
 * Possibilité de "liker" un objet
+* Possibilité de noter un objet
 * Indique lorsqu'aucune connexion n'est disponible
+* Modification du CSS en fonction de l'orientation (paysage, portrait)

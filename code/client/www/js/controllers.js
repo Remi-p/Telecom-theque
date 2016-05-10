@@ -9,14 +9,10 @@ angular.module('starter.controllers', [])
     $scope.$on("$ionicView.beforeLeave", function(event, data){
         // Loading tant que les données ne sont pas récupérées
         $ionicLoading.show();
-        
-        //~ console.log((new Date()).getTime() + ": beforeLeave");
     });
     
     $scope.$on("$ionicView.enter", function(event, data) {
         $ionicLoading.hide(); // Fin du loading
-        
-        //~ console.log((new Date()).getTime() + ": Enter");
     });
 
 })
@@ -70,9 +66,11 @@ app.controller("VitrineCtrl", function($scope, $stateParams, GetJSON) {
 
 /* ======================== Fetch d'un objet ======================== */
 // objet.html
-app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate, Like) {
+app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideBoxDelegate, Social) {
     
+    // Les loaders
     $scope.spinnerlike = false;
+    $scope.spinnerstar = false;
     
     GetJSON.getdata("objets/" + $stateParams.id).then(function(d) {
         $scope.objet = d;
@@ -82,10 +80,17 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         $ionicSlideBoxDelegate.update();
     });
     
-    Like.getlikes($stateParams.id).then(function(d) {
+    // Récupération des likes
+    Social.get($stateParams.id).then(function(d) {
+        
         // (cf. http://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript)
         $scope.like = (d.like === 'true');
+        
         $scope.nb_like = d.nb;
+        
+        $scope.star = (d.note === 'true');
+        $scope.nb_vote = d.nbv;
+        $scope.moy_vote = d.moy;
     });
     
     $scope.setLike = function() {
@@ -93,7 +98,7 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         // Le spinner remplace l'icône
         $scope.spinnerlike = true;
         
-        Like.setlike($stateParams.id).then(function(d) {
+        Social.setlike($stateParams.id).then(function(d) {
             
             if (d == "Ajout") {
                 $scope.like = true;
@@ -112,6 +117,34 @@ app.controller("ObjetCtrl", function($scope, $stateParams, GetJSON, $ionicSlideB
         });
     };
     
+    $scope.setStars = function(note) {
+        
+        $scope.spinnerstar = true;
+        
+        Social.setstars($stateParams.id, note).then(function(d) {
+            
+            console.log(d);
+            
+            // Update de la moyenne
+            $scope.moy_vote = d.moy;
+            
+            if (d.msg == "Ajout") {
+                $scope.star = true;
+                $scope.nb_vote = $scope.nb_vote + 1;
+            }
+            else if (d.msg == "Suppression") {
+                $scope.star = false;
+                $scope.nb_vote = $scope.nb_vote - 1;
+            }
+            // else (default) : on ne touche à rien
+            
+            $scope.spinnerstar = false;
+            
+        }, function(e) { // Erreur
+            $scope.spinnerstar = false;
+        });
+    }
+    
 });
 
 /* ====================== QR Code et recherche ====================== */
@@ -121,6 +154,7 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
     
     //Permet d'obtenir intervalle la date min et max des objets dynamiquement 
     var annees=useYear;
+    
     //~ console.log(annees);
     $scope.yearmin =annees.amin;
     $scope.yearmax =annees.amax;
@@ -159,9 +193,9 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
         }, 400 );
     }
 
-    //Qr code
+    //Qr code (redirection ou message d'erreurs)
     $scope.lireCode=function(){
-        //alert("coucou")
+        
         $cordovaBarcodeScanner.scan().then(function(barcodeData) {
             
             // http://stackoverflow.com/questions/8954637/jquery-regex-validation-for-letters-and-numbers-onlyu
@@ -182,7 +216,7 @@ app.controller("SearchCtrl",function(useYear,$scope,$cordovaBarcodeScanner,GetJS
             
             // Test si l'objet existe
             GetJSON.getdata("objets/test/" + barcodeData.text).then(function(d) {
-                if (d == "true") {
+                if ((d.existence) && d.existence == "true") {
                     $window.location.href = '#/tab/search/' + barcodeData.text;
                 }
                 else {

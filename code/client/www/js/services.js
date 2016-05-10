@@ -37,14 +37,12 @@ angular.module('starter.services', [])
         return false;
     }
     
-    var url = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/";
-    
     return {
         
         // Création de la fct getdata
         getdata: function(route) {
             
-            promise = $http.get(url + route).then(function(response) {
+            promise = $http.get(url_api + route).then(function(response) {
                 return response.data;
             });
             
@@ -56,10 +54,10 @@ angular.module('starter.services', [])
     
 })
 
-// Service gérant les likes/favoris
-.factory('Like', function($http, $cordovaDevice) {
+// Service gérant les likes/favoris & les notes
+.factory('Social', function($http, $cordovaDevice) {
     
-    var url = "http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/likes/";
+    var url = url_api + "objets/";
     
     var uuid;
     
@@ -72,20 +70,33 @@ angular.module('starter.services', [])
     return {
         
         // Fonction de récupération
-        getlikes: function(objet) {
+        get: function(objet) {
             
-            promise = $http.get(url + objet + "/" + uuid).then(function(response) {
+            promise = $http.get(url + "meta/" + objet + "/" + uuid).then(function(response) {
                 return response.data;
             });
             
             return promise;
         },
         
+        // Ajout - suppression d'un like
         setlike: function(objet) {
             
             topost = { 'uuid': uuid, 'objet': objet };
             
-            promise = $http.post(url + "add/", topost).then(function(response) {
+            promise = $http.post(url + "likes/action/", topost).then(function(response) {
+                return response.data;
+            });
+            
+            return promise;
+        },
+        
+        // Ajout - suppression d'une étoile
+        setstars: function(objet, note) {
+            
+            topost = { 'uuid': uuid, 'objet': objet, 'note': note };
+            
+            promise = $http.post(url + "notes/action/", topost).then(function(response) {
                 return response.data;
             });
             

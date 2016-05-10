@@ -31,7 +31,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/vitrines',
         views: {
             // Le nom de la vue est important, c'est ce qui détermine
-            // l'appartenance au même onglet
+            // l'appartenance au même onglet (=> historique de nav.)
             'tab-vitrines': {
                 templateUrl: 'templates/tab-vitrines.html',
                 controller: 'VitrinesCtrl'
@@ -70,10 +70,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 return GetJSON.getdata("objets/dates");
 
             }
-            /*useYear : function($http,$templateCache){
-            // $http returns a promise for the url data
-            return $http({method: 'GET', url: 'http://tgourdel.rtrinity.enseirb-matmeca.fr/api/objets/dates',cache: $templateCache});
-            }*/
         }
     })
     // Récupération d'un obj suite à une recherche
